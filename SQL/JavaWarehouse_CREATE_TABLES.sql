@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS dbo.Agents;
 DROP TABLE IF EXISTS dbo.Warehouse_Status;
 DROP TABLE IF EXISTS dbo.Warehouse_Types;
 DROP TABLE IF EXISTS dbo.Climate_Conditions;
-DROP TABLE IF EXISTS dbo.Tenents;
+DROP TABLE IF EXISTS dbo.Renter;
 
 
 GO
@@ -52,8 +52,8 @@ GO
 
 CREATE TABLE Owner_Accounts (
 	ID int IDENTITY(1, 1) NOT NULL, CONSTRAINT PK_OWNER_ACCOUNTS_ID PRIMARY KEY CLUSTERED (ID), 
-	AdminUsername nvarchar(32) NOT NULL,
-	AdminPassword nvarchar(32) NOT NULL,
+	OwnerUsername nvarchar(32) NOT NULL,
+	OwnerPassword nvarchar(32) NOT NULL,
 	OwnerID int NOT NULL UNIQUE FOREIGN KEY REFERENCES dbo.Owners(ID)
 	);
 
@@ -61,8 +61,8 @@ GO
 
 CREATE TABLE Agent_Accounts (
 	ID int IDENTITY(1, 1) NOT NULL, CONSTRAINT PK_AGENT_ACCOUNTS_ID PRIMARY KEY CLUSTERED (ID), 
-	AdminUsername nvarchar(32) NOT NULL,
-	AdminPassword nvarchar(32) NOT NULL,
+	AgentUsername nvarchar(32) NOT NULL,
+	AgentPassword nvarchar(32) NOT NULL,
 	AgentID int NOT NULL UNIQUE FOREIGN KEY REFERENCES dbo.Agents(ID)
 	);
 
@@ -109,7 +109,7 @@ CREATE TABLE Warehouse_Rooms (
 
 GO
 
-CREATE TABLE Tenents (
+CREATE TABLE Renter (
 	ID int IDENTITY(1, 1) NOT NULL, CONSTRAINT PK_TENENTS_ID PRIMARY KEY CLUSTERED (ID),
 	FirsName nvarchar(50) NOT NULL,
 	LastName nvarchar(50) NOT NULL,
@@ -124,6 +124,6 @@ CREATE TABLE Warehouse_Contracts (
 	Price float NOT NULL,
 	WarehouseRoomID int NOT NULL, CONSTRAINT FK_CONTRACTS_WAREHOUS_ROOM_ID FOREIGN KEY (WarehouseRoomID) REFERENCES dbo.Warehouse_Rooms(ID),
 	AgentID int NOT NULL, CONSTRAINT FK_CONTRACTS_AGENT_ID FOREIGN KEY (AgentID) REFERENCES dbo.Agents(ID),
-	TenentID int NOT NULL, CONSTRAINT FK_CONTRACTS_TENTENT_ID FOREIGN KEY (TenentID) REFERENCES dbo.Tenents(ID),
+	RenterID int NOT NULL, CONSTRAINT FK_CONTRACTS_TENTENT_ID FOREIGN KEY (RenterID) REFERENCES dbo.Renter(ID),
 	OwnerID int NOT NULL, CONSTRAINT FK_CONTRACTS_OWNER_ID FOREIGN KEY (OwnerID) REFERENCES dbo.Owners(ID),
 	);
