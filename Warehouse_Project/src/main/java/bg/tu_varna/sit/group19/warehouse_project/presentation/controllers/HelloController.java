@@ -27,8 +27,8 @@ public class HelloController implements EventHandler<MouseEvent> {
     }
 
     //private final AdminRepository adminRepository = AdminRepository.getInstance();
-    private final ClimateRepository climateRepository = ClimateRepository.getInstance();
-    private final BaseRepository<WarehouseStatus> warehouseStatusBaseRepository = BaseRepository.getInstance();
+    //private final ClimateRepository climateRepository = ClimateRepository.getInstance();
+    //private final BaseRepository<WarehouseStatus> warehouseStatusBaseRepository = BaseRepository.getInstance();
 
     @FXML
     private void initialize(){
@@ -51,11 +51,11 @@ public class HelloController implements EventHandler<MouseEvent> {
         climateRepository.save(condition);
         */
 
-
+        /*
         WarehouseStatus warehouseStatus = new WarehouseStatus();
         warehouseStatus.setStatus("FREE");
         warehouseStatusBaseRepository.save(warehouseStatus);
-        
+        */
 
         welcomeText.setText(model.getWelcomeMessage());
 
