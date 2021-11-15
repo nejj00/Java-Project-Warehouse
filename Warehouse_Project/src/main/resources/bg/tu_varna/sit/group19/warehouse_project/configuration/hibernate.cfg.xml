@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+    <property name="connection.url">jdbc:sqlserver://localhost\MSSQLSERVER:1433;database=JavaWarehouse</property>
+    <property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+    <property name="connection.username">Java_Project</property>
+    <property name="connection.password">myJava1234</property>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hiernate.hbm2ddl.auto">update</property>
+
+    <mapping class="bg.tu_varna.sit.group19.warehouse_project.data.entities.Admin"/>
+    <mapping class="bg.tu_varna.sit.group19.warehouse_project.data.entities.ClimateCondition"/>
+
+    <!-- <property name="connection.username"/> -->
+    <!-- <property name="connection.password"/> -->
+
+    <!-- DB schema will be updated if needed -->
+    <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+  </session-factory>
+</hibernate-configuration>

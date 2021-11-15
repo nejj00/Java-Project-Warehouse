@@ -111,7 +111,7 @@ GO
 
 CREATE TABLE Renters (
 	ID int IDENTITY(1, 1) NOT NULL, CONSTRAINT PK_TENENTS_ID PRIMARY KEY CLUSTERED (ID),
-	FirsName nvarchar(50) NOT NULL,
+	FirstName nvarchar(50) NOT NULL,
 	LastName nvarchar(50) NOT NULL,
 	PhoneNumber nvarchar(20) NOT NULL
 	

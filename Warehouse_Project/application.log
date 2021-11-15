@@ -1,0 +1,23 @@
+[JavaFX Application Thread] ERROR bg.tu_varna.sit.group19.warehouse_project.data.access.Connection  - Initial SessionFactory creation failed java.lang.NoClassDefFoundError: java/sql/SQLException
+[JavaFX Application Thread] ERROR bg.tu_varna.sit.group19.warehouse_project.data.access.Connection  - Initial SessionFactory creation failed java.lang.NoClassDefFoundError: java/sql/SQLException
+[JavaFX Application Thread] ERROR bg.tu_varna.sit.group19.warehouse_project.data.access.Connection  - Initial SessionFactory creation failed java.lang.NoClassDefFoundError: java/sql/SQLException
+[JavaFX Application Thread] ERROR bg.tu_varna.sit.group19.warehouse_project.data.access.Connection  - Initial SessionFactory creation failed java.lang.NoClassDefFoundError: java/sql/SQLException
+[JavaFX Application Thread] ERROR bg.tu_varna.sit.group19.warehouse_project.data.access.Connection  - Initial SessionFactory creation failed java.lang.NoClassDefFoundError: java/sql/SQLException
+[JavaFX Application Thread] ERROR bg.tu_varna.sit.group19.warehouse_project.data.access.Connection  - Initial SessionFactory creation failed java.lang.NoClassDefFoundError: java/sql/SQLException
+[JavaFX Application Thread] ERROR bg.tu_varna.sit.group19.warehouse_project.data.access.Connection  - Initial SessionFactory creation failedjava.lang.NoClassDefFoundError: java/sql/SQLException
+[JavaFX Application Thread] ERROR bg.tu_varna.sit.group19.warehouse_project.data.access.Connection  - Initial SessionFactory creation failedjava.lang.NoClassDefFoundError: java/sql/SQLException
+[JavaFX Application Thread] ERROR bg.tu_varna.sit.group19.warehouse_project.data.access.Connection  - Initial SessionFactory creation failedjava.lang.NoClassDefFoundError: java/sql/SQLException
+[JavaFX Application Thread] ERROR bg.tu_varna.sit.group19.warehouse_project.data.access.Connection  - Initial SessionFactory creation failedjava.lang.ExceptionInInitializerError
+[JavaFX Application Thread] ERROR bg.tu_varna.sit.group19.warehouse_project.data.access.Connection  - Initial SessionFactory creation failed java.lang.ExceptionInInitializerError
+[JavaFX Application Thread] ERROR bg.tu_varna.sit.group19.warehouse_project.data.access.Connection  - Initial SessionFactory creation failed java.lang.NoClassDefFoundError: java/sql/SQLException
+[JavaFX Application Thread] ERROR bg.tu_varna.sit.group19.warehouse_project.data.access.Connection  - Initial SessionFactory creation failed java.lang.NoClassDefFoundError: java/sql/SQLException
+[JavaFX Application Thread] ERROR bg.tu_varna.sit.group19.warehouse_project.data.access.Connection  - Initial SessionFactory created failedjava.lang.NoClassDefFoundError: java/sql/SQLException
+[JavaFX Application Thread] ERROR bg.tu_varna.sit.group19.warehouse_project.data.access.Connection  - Initial SessionFactory created failedjava.lang.NoClassDefFoundError: java/sql/SQLException
+[JavaFX Application Thread] ERROR bg.tu_varna.sit.group19.warehouse_project.data.access.Connection  - Initial SessionFactory created failedjava.lang.ExceptionInInitializerError
+[JavaFX Application Thread] ERROR bg.tu_varna.sit.group19.warehouse_project.data.access.Connection  - Initial SessionFactory created failedjava.lang.ExceptionInInitializerError
+[JavaFX Application Thread] ERROR bg.tu_varna.sit.group19.warehouse_project.data.access.Connection  - Initial SessionFactory created failedjava.lang.ExceptionInInitializerError
+[JavaFX Application Thread] ERROR bg.tu_varna.sit.group19.warehouse_project.data.access.Connection  - Initial SessionFactory created failedjava.lang.NoClassDefFoundError: java/sql/SQLException
+[JavaFX Application Thread] ERROR bg.tu_varna.sit.group19.warehouse_project.data.access.Connection  - Initial SessionFactory created failedorg.hibernate.internal.util.config.ConfigurationException: Could not locate cfg.xml resource [hibernate.cfg.xml]
+[JavaFX Application Thread] ERROR bg.tu_varna.sit.group19.warehouse_project.data.access.Connection  - Initial SessionFactory created failedorg.hibernate.internal.util.config.ConfigurationException: Could not locate cfg.xml resource [/bg/tu_varna/sit/group19/warehouse_project/configuration/hibernate.cfg.xml]
+[JavaFX Application Thread] ERROR bg.tu_varna.sit.group19.warehouse_project.data.access.Connection  - Initial SessionFactory created failedorg.hibernate.internal.util.config.ConfigurationException: Could not locate cfg.xml resource [hibernate.cfg.xml]
+[JavaFX Application Thread] ERROR bg.tu_varna.sit.group19.warehouse_project.data.access.Connection  - Initial SessionFactory created failedorg.hibernate.internal.util.config.ConfigurationException: Specified cfg.xml file [E:\bg\tu_varna\sit\group19\warehouse_project\configuration\hibernate.cfg.xml] does not exist
