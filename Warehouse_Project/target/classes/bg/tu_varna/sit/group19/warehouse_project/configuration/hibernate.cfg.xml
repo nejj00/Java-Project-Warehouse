@@ -13,8 +13,18 @@
     <property name="hiernate.hbm2ddl.auto">update</property>
 
     <mapping class="bg.tu_varna.sit.group19.warehouse_project.data.entities.Admin"/>
+    <mapping class="bg.tu_varna.sit.group19.warehouse_project.data.entities.AdminAccount"/>
+    <mapping class="bg.tu_varna.sit.group19.warehouse_project.data.entities.Agent"/>
+    <mapping class="bg.tu_varna.sit.group19.warehouse_project.data.entities.AgentAccount"/>
+    <mapping class="bg.tu_varna.sit.group19.warehouse_project.data.entities.Owner"/>
+    <mapping class="bg.tu_varna.sit.group19.warehouse_project.data.entities.OwnerAccount"/>
+    <mapping class="bg.tu_varna.sit.group19.warehouse_project.data.entities.Renter"/>
+    <mapping class="bg.tu_varna.sit.group19.warehouse_project.data.entities.WarehouseStatus"/>
+    <mapping class="bg.tu_varna.sit.group19.warehouse_project.data.entities.WarehouseType"/>
+    <mapping class="bg.tu_varna.sit.group19.warehouse_project.data.entities.Warehouse"/>
     <mapping class="bg.tu_varna.sit.group19.warehouse_project.data.entities.ClimateCondition"/>
-
+    <mapping class="bg.tu_varna.sit.group19.warehouse_project.data.entities.WarehouseRoom"/>
+    <mapping class="bg.tu_varna.sit.group19.warehouse_project.data.entities.WarehouseContract"/>
     <!-- <property name="connection.username"/> -->
     <!-- <property name="connection.password"/> -->
 

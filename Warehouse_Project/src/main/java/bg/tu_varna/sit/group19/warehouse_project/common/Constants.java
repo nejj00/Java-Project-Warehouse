@@ -14,6 +14,6 @@ public class Constants {
     }
 
     public static class HibernateConfig{
-        public static final String CFG_FILE = "/bg/tu_varna/sit/group19/warehouse_project/configuration/hibernate.cfg.xml";
+        public static final String CFG_FILE = "E:/Projects/UNI/semester V/Java_Project/Project_Files/Warehouse_Project/src/main/resources/bg/tu_varna/sit/group19/warehouse_project/configuration/hibernate.cfg.xml";
     }
 }

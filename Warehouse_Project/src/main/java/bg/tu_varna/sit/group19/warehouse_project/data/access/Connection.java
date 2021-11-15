@@ -15,7 +15,7 @@ public class Connection {
 
     static {
         try {
-            sessionFactory = new Configuration().configure(new File("E:\\Projects\\UNI\\semester V\\Java_Project\\Project_Files\\Warehouse_Project\\src\\main\\resources\\bg\\tu_varna\\sit\\group19\\warehouse_project\\configuration\\hibernate.cfg.xml")).buildSessionFactory();
+            sessionFactory = new Configuration().configure(new File(Constants.HibernateConfig.CFG_FILE)).buildSessionFactory();
         } catch (Throwable ex) {
             log.error("Initial SessionFactory created failed" + ex);
         }
