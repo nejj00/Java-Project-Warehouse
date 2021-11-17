@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+
+        <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+        <property name="hibernate.connection.url">jdbc:sqlserver://localhost\MSSQLSERVER:1433;database=Java_Test_Server</property>
+        <property name="hibernate.connection.username">Radi_boy112</property>
+        <property name="hibernate.connection.password">U18sccemnjq51rs1</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+
+        <mapping class="bg.tuvarna.sit.example.data.enities.Positions"/>
+        <mapping class="bg.tuvarna.sit.example.data.enities.Employees"/>
+    </session-factory>
+</hibernate-configuration>

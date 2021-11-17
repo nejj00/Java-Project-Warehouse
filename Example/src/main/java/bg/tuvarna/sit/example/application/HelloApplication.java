@@ -1,6 +1,6 @@
-package bg.tu_varna.sit.group19.warehouse_project.application;
+package bg.tuvarna.sit.example.application;
 
-import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
+import bg.tuvarna.sit.example.common.Constants;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,7 +19,6 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-
         PropertyConfigurator.configure(HelloApplication.class.getResource(Constants.Configurations.LOG4J_PROPERTIES));
         URL path = getClass().getResource(Constants.View.HELLO_VIEW);
 
@@ -34,14 +33,14 @@ public class HelloApplication extends Application {
             stage.setResizable(false);
             stage.setMaxWidth(780);
             stage.setMaxHeight(630);
-            stage.setWidth(320);
-            stage.setHeight(230);
+            stage.setMinWidth(320);
+            stage.setMinHeight(240);
             stage.show();
-        }else {
-            log.error("Sorry, the main fxml could not be loaded");
+        }
+        else{
+            log.error("Sorry, the main fxml could not be loaded.");
             System.exit(-1);
         }
-
 
     }
 
