@@ -13,7 +13,13 @@ import java.util.Optional;
 public class BaseRepository<T> implements DAORepository<T>{
 
     protected static  final Logger log = Logger.getLogger(BaseRepository.class);
+    protected final Class<T> typeParameterClass;
 
+    public BaseRepository(Class<T> typeParameterClass){
+        this.typeParameterClass = typeParameterClass;
+    }
+
+    /*
     public static BaseRepository getInstance()
     {
         return BaseRepository.BaseRepositoryHolder.INSTANCE;
@@ -22,6 +28,8 @@ public class BaseRepository<T> implements DAORepository<T>{
     private static class BaseRepositoryHolder {
         public static final BaseRepository INSTANCE = new BaseRepository();
     }
+
+     */
 
     @Override
     public void save(T obj) {
@@ -69,13 +77,36 @@ public class BaseRepository<T> implements DAORepository<T>{
     }
 
     @Override
-    public Optional<T> getById(Long obj) {
-        return Optional.empty();
+    public Optional<T> getById(Long id) {
+        Session session = Connection.openSession();
+        Transaction transaction = session.beginTransaction();
+        Optional<T> obj = Optional.of(session.get(typeParameterClass, id));
+        try{
+             obj = Optional.of(session.get(typeParameterClass, id));
+        }catch (Exception ex){
+            log.error("Failed getById " + ex.getMessage());
+        }
+
+        return obj;
     }
 
 
     @Override
     public List<T> getAll() {
-        return null;
+        Session session = Connection.openSession();
+        Transaction transaction = session.beginTransaction();
+        List<T> admins = new LinkedList<>();
+        try{
+            String jpql = "SELECT u FROM " + typeParameterClass.getName() + " u";
+            admins.addAll(session.createQuery(jpql, typeParameterClass).getResultList());
+            log.info("Got all tasks");
+        }catch (Exception ex){
+            log.error("Get Task error: " + ex.getMessage());
+        }finally {
+            transaction.commit();
+            Connection.openSessionClose();
+        }
+
+        return admins;
     }
 }

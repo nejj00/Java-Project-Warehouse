@@ -13,6 +13,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
+import java.io.LineNumberInputStream;
+import java.util.List;
+
 public class HelloController implements EventHandler<MouseEvent> {
     @FXML
     private Label welcomeText;
@@ -48,17 +51,27 @@ public class HelloController implements EventHandler<MouseEvent> {
 
         /*
         ClimateCondition condition = new ClimateCondition();
-        condition.setConditions("COLD");
+        condition.setConditions("HUMID");
         climateRepository.save(condition);
+
+
+        List<ClimateCondition> conditions = climateRepository.getAll();
+        ClimateCondition condition1 = conditions.get(3);
+        condition1.setConditions("WARM");
+
+        climateRepository.update(condition1);
         */
 
+        ClimateCondition condition2 = climateRepository.getById((long)4).get();
+        System.out.println(condition2.getConditions());
 
+
+        /*
         WarehouseStatus warehouseStatus = new WarehouseStatus();
         warehouseStatus.setStatus("FREE");
         warehouseStatusRepository.save(warehouseStatus);
 
-
         welcomeText.setText(model.getWelcomeMessage());
-
+         */
     }
 }

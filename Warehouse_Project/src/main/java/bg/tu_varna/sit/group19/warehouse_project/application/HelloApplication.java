@@ -35,7 +35,7 @@ public class HelloApplication extends Application {
             stage.setMaxWidth(780);
             stage.setMaxHeight(630);
             stage.setWidth(320);
-            stage.setHeight(230);
+            stage.setHeight(630);
             stage.show();
         }else {
             log.error("Sorry, the main fxml could not be loaded");

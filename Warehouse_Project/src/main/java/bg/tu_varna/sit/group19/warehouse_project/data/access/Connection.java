@@ -12,6 +12,7 @@ public class Connection {
 
     private static final Logger log = Logger.getLogger(Connection.class);
     private static SessionFactory sessionFactory;
+    private static Session session;
 
     static {
         try {
@@ -22,10 +23,10 @@ public class Connection {
     }
 
     public static Session openSession() {
-        return sessionFactory.openSession();
+        return session = sessionFactory.openSession();
     }
 
     public static void openSessionClose() {
-        sessionFactory.close();
+        session.close();
     }
 }
