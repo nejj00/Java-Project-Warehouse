@@ -16,7 +16,7 @@ import javafx.scene.input.MouseEvent;
 import java.io.LineNumberInputStream;
 import java.util.List;
 
-public class HelloController implements EventHandler<MouseEvent> {
+public class    HelloController implements EventHandler<MouseEvent> {
     @FXML
     private Label welcomeText;
 
