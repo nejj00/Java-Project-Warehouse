@@ -32,7 +32,12 @@ public class HelloController implements EventHandler<MouseEvent> {
 
     @FXML
     private void initialize(){
-        helloButton.setOnMouseClicked(this::handle);
+        helloButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println("mouse click detected! " + event.getSource());
+            }
+        });
     }
 
     @Override
