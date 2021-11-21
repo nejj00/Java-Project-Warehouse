@@ -4,6 +4,9 @@ public class Constants {
     public static class View{
         public static final  String HELLO_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentatoins.view/hello-view.fxml";
         public static final String LOGIN_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentatoins.view/login.fxml";
+        public static final String MAIN_WINDOW_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentatoins.view/MainWindow.fxml";
+        public static final String REGISTER_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentatoins.view/register.fxml";
+
     }
 
     public static class Configurations{
@@ -13,6 +16,7 @@ public class Constants {
     public static class Values{
         public static  final String Title = "Example App";
         public static  final String LOGIN_TITILE = "Login";
+        public static  final String MAIN_TITILE = "Login";
     }
 
     public static class HibernateConfig{

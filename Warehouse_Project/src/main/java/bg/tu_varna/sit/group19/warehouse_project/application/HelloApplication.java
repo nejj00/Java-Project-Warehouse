@@ -19,9 +19,8 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-
         PropertyConfigurator.configure(HelloApplication.class.getResource(Constants.Configurations.LOG4J_PROPERTIES));
-        URL path = getClass().getResource(Constants.View.HELLO_VIEW);
+        URL path = getClass().getResource(Constants.View.MAIN_WINDOW_VIEW);
 
         if(path != null){
             Parent root = FXMLLoader.load(path);
@@ -41,8 +40,6 @@ public class HelloApplication extends Application {
             log.error("Sorry, the main fxml could not be loaded");
             System.exit(-1);
         }
-
-
     }
 
     public static void main(String[] args) {

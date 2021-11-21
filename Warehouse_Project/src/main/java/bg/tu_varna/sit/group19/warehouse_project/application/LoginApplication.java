@@ -17,7 +17,6 @@ public class LoginApplication extends Application {
 
     private static final Logger log = Logger.getLogger(LoginApplication.class);
 
-
     public static void main(String[] args) {
         launch(args);
     }
@@ -25,7 +24,7 @@ public class LoginApplication extends Application {
     @Override
     public void start(Stage loginStage) throws IOException  {
 
-        PropertyConfigurator.configure(HelloApplication.class.getResource(Constants.Configurations.LOG4J_PROPERTIES));
+        PropertyConfigurator.configure(LoginApplication.class.getResource(Constants.Configurations.LOG4J_PROPERTIES));
         URL path = getClass().getResource(Constants.View.LOGIN_VIEW);
 
         if(path != null){
