@@ -2,24 +2,19 @@ package bg.tu_varna.sit.group19.warehouse_project.presentation.controllers;
 
 import bg.tu_varna.sit.group19.warehouse_project.business.services.LoginServices;
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
+import bg.tu_varna.sit.group19.warehouse_project.common.Methods;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Admin;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Agent;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Owner;
 import bg.tu_varna.sit.group19.warehouse_project.presentation.models.LoginModel;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.net.URL;
 
 public class LoginController implements EventHandler<MouseEvent> {
@@ -38,6 +33,7 @@ public class LoginController implements EventHandler<MouseEvent> {
 
     private final LoginModel model;
     private final LoginServices services;
+    private final Methods method;
     public static int AccountType;
     public static Admin admin;
     public static Agent agent;
@@ -45,6 +41,7 @@ public class LoginController implements EventHandler<MouseEvent> {
     URL registerPath = getClass().getResource(Constants.View.REGISTER_VIEW);
 
     public LoginController() {
+        this.method = new Methods();
         this.model = new LoginModel();
         this.services = new LoginServices();
     }
@@ -65,26 +62,17 @@ public class LoginController implements EventHandler<MouseEvent> {
         //closes login stage
 
         AccountType = 1;
-        Node node = (Node) mouseEvent.getSource();
-        Stage thisStage = (Stage) node.getScene().getWindow();
+        Stage thisStage = method.getStage(mouseEvent);
+
         thisStage.hide();
     }
 
     @FXML
     public void RegisterClicked(MouseEvent mouseEvent) {
         AccountType = 0;
-        Node node = (Node) mouseEvent.getSource();
-        Stage thisStage = (Stage) node.getScene().getWindow();
+        Stage thisStage = method.getStage(mouseEvent);
 
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(registerPath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        assert root != null;
-        Scene registerScene = new Scene(root);
-        thisStage.setScene(registerScene);
+        method.ChangeScene(thisStage,registerPath);
     }
 
     @FXML
