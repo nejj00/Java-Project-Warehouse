@@ -1,11 +1,19 @@
 package bg.tu_varna.sit.group19.warehouse_project.presentation.controllers;
 
+import bg.tu_varna.sit.group19.warehouse_project.business.services.AgentAccountService;
+import bg.tu_varna.sit.group19.warehouse_project.business.services.AgentService;
+import bg.tu_varna.sit.group19.warehouse_project.business.services.OwnerAccountService;
+import bg.tu_varna.sit.group19.warehouse_project.business.services.OwnerService;
+import bg.tu_varna.sit.group19.warehouse_project.business.utils.RegistrationChecker;
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
 import bg.tu_varna.sit.group19.warehouse_project.common.Methods;
+import bg.tu_varna.sit.group19.warehouse_project.data.entities.Agent;
+import bg.tu_varna.sit.group19.warehouse_project.data.entities.AgentAccount;
+import bg.tu_varna.sit.group19.warehouse_project.data.entities.Owner;
+import bg.tu_varna.sit.group19.warehouse_project.data.entities.OwnerAccount;
 import bg.tu_varna.sit.group19.warehouse_project.presentation.models.RegisterModel;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -46,6 +54,13 @@ public class RegisterController implements EventHandler<MouseEvent> {
     private final RegisterModel model;
     private final Methods method;
 
+    OwnerService ownerService = OwnerService.getInstance();
+    OwnerAccountService ownerAccountService = OwnerAccountService.getInstance();
+    AgentService agentService = AgentService.getInstance();
+    AgentAccountService agentAccountService = AgentAccountService.getInstance();
+
+    RegistrationChecker registrationChecker = new RegistrationChecker();
+
     public RegisterController() {
         this.model=new RegisterModel();
         this.method=new Methods();
@@ -63,21 +78,59 @@ public class RegisterController implements EventHandler<MouseEvent> {
         String lastName = this.lastName.getText();
         String username = this.username.getText();
         String password = this.password.getText();
-        String confPassword = this.confirmPassword.getText();
+        String confPassword = this.confirmPassword.getText(); // mogat da se otdelqt na metod
 
         if(!password.equals(confPassword)){
             registerLabel.setText(model.getWrongPasswordMessage());
             this.password.clear();
             this.confirmPassword.clear();
         }
-        else if(username.isEmpty()||firstName.isEmpty()||lastName.isEmpty()||password.isEmpty()){
+        else if(username.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || password.isEmpty()){
             registerLabel.setText(model.getEmptyFieldMessage());
         }
-        else if(!agentRadioButton.isSelected()&&!ownerRadioButton.isSelected()){
+        else if(!agentRadioButton.isSelected() && !ownerRadioButton.isSelected()){
             registerLabel.setText(model.getSelectAccountTypeMessage());
         }
         else{
             //call register func from register service
+            if(registrationChecker.accountExists(username))
+            {
+                registerLabel.setText(model.getUsernameExists());
+                return;
+            }
+
+            if(ownerRadioButton.isSelected())
+            {
+                Owner owner = new Owner();
+                owner.setFirstName(firstName);
+                owner.setLastName(lastName);
+
+                ownerService.insertOwner(owner);
+
+                OwnerAccount ownerAccount = new OwnerAccount();
+                ownerAccount.setUsername(username);
+                ownerAccount.setPassword(password);
+                ownerAccount.setOwner(owner);
+
+                ownerAccountService.insertOwnerAccount(ownerAccount);// otdeli na metod
+            }
+
+            if(agentRadioButton.isSelected())
+            {
+                Agent agent = new Agent();
+                agent.setFirstName(firstName);
+                agent.setLastName(lastName);
+
+                agentService.insertAgent(agent);
+
+                AgentAccount agentAccount = new AgentAccount();
+                agentAccount.setUsername(username);
+                agentAccount.setPassword(password);
+                agentAccount.setAgent(agent);
+
+                agentAccountService.insertAgentAccount(agentAccount);// otdeli na metod
+            }
+
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Registration message!");
