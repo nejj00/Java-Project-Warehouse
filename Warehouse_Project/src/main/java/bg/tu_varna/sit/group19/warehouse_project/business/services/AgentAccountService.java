@@ -17,4 +17,12 @@ public class AgentAccountService {
     public void insertAgentAccount(AgentAccount agentAccount){
         agentAccountRepository.save(agentAccount);
     }
+
+    public void updateAgentAccount(AgentAccount agentAccount){
+        agentAccountRepository.update(agentAccount);
+    }
+
+    public void deleteAgentAccount(AgentAccount agentAccount){
+        agentAccountRepository.delete(agentAccount);
+    }
 }

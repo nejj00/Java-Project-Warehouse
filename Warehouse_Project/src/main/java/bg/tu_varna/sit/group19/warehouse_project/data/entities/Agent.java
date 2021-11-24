@@ -19,6 +19,9 @@ public class Agent {
     @Column(name = "LastName", nullable = false)
     private String lastName;
 
+    @Column(name = "Raiting", nullable = false)
+    private float rating;
+
     @OneToOne(mappedBy = "agent")
     private AgentAccount agentAccount;
 
@@ -63,6 +66,14 @@ public class Agent {
 
     public void setContracts(Set<WarehouseContract> contracts) {
         this.contracts = contracts;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 
     @Override

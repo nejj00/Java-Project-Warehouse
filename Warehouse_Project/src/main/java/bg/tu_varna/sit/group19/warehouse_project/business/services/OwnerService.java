@@ -18,5 +18,11 @@ public class OwnerService {
         ownerRepository.save(owner);
     }
 
-    
+    public void updateOwner(Owner agent){
+        ownerRepository.update(agent);
+    }
+
+    public void deleteOwner(Owner agent){
+        ownerRepository.delete(agent);
+    }
 }

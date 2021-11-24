@@ -1,6 +1,7 @@
 package bg.tu_varna.sit.group19.warehouse_project.presentation.controllers;
 
 import bg.tu_varna.sit.group19.warehouse_project.business.services.LoginServices;
+import bg.tu_varna.sit.group19.warehouse_project.business.utils.AccountChecker;
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
 import bg.tu_varna.sit.group19.warehouse_project.common.Methods;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Admin;
@@ -29,7 +30,7 @@ public class LoginController implements EventHandler<MouseEvent> {
     @FXML
     private PasswordField Password;
     @FXML
-    private Label LabelTryAgain;
+    private Label LoginLabel;
 
     private final LoginModel model;
     private final LoginServices services;
@@ -39,6 +40,8 @@ public class LoginController implements EventHandler<MouseEvent> {
     public static Agent agent;
     public static Owner owner;
     URL registerPath = getClass().getResource(Constants.View.REGISTER_VIEW);
+
+    AccountChecker accountChecker = new AccountChecker();
 
     public LoginController() {
         this.method = new Methods();
@@ -60,6 +63,14 @@ public class LoginController implements EventHandler<MouseEvent> {
         //else
         //save account type and account info
         //closes login stage
+        String username = this.Username.getText();
+        String password = this.Password.getText();
+
+        if(!accountChecker.accountExists(username))
+        {
+            LoginLabel.setText(model.getWrongMessage());
+            return;
+        }
 
         AccountType = 1;
         Stage thisStage = method.getStage(mouseEvent);

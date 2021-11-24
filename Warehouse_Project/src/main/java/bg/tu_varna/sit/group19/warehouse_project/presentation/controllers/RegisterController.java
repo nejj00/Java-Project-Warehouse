@@ -4,7 +4,7 @@ import bg.tu_varna.sit.group19.warehouse_project.business.services.AgentAccountS
 import bg.tu_varna.sit.group19.warehouse_project.business.services.AgentService;
 import bg.tu_varna.sit.group19.warehouse_project.business.services.OwnerAccountService;
 import bg.tu_varna.sit.group19.warehouse_project.business.services.OwnerService;
-import bg.tu_varna.sit.group19.warehouse_project.business.utils.RegistrationChecker;
+import bg.tu_varna.sit.group19.warehouse_project.business.utils.AccountChecker;
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
 import bg.tu_varna.sit.group19.warehouse_project.common.Methods;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Agent;
@@ -59,7 +59,7 @@ public class RegisterController implements EventHandler<MouseEvent> {
     AgentService agentService = AgentService.getInstance();
     AgentAccountService agentAccountService = AgentAccountService.getInstance();
 
-    RegistrationChecker registrationChecker = new RegistrationChecker();
+    AccountChecker accountChecker = new AccountChecker();
 
     public RegisterController() {
         this.model=new RegisterModel();
@@ -78,7 +78,7 @@ public class RegisterController implements EventHandler<MouseEvent> {
         String lastName = this.lastName.getText();
         String username = this.username.getText();
         String password = this.password.getText();
-        String confPassword = this.confirmPassword.getText(); // mogat da se otdelqt na metod
+        String confPassword = this.confirmPassword.getText();
 
         if(!password.equals(confPassword)){
             registerLabel.setText(model.getWrongPasswordMessage());
@@ -93,7 +93,7 @@ public class RegisterController implements EventHandler<MouseEvent> {
         }
         else{
             //call register func from register service
-            if(registrationChecker.accountExists(username))
+            if(accountChecker.accountExists(username))
             {
                 registerLabel.setText(model.getUsernameExists());
                 return;
@@ -101,47 +101,59 @@ public class RegisterController implements EventHandler<MouseEvent> {
 
             if(ownerRadioButton.isSelected())
             {
-                Owner owner = new Owner();
-                owner.setFirstName(firstName);
-                owner.setLastName(lastName);
-
-                ownerService.insertOwner(owner);
-
-                OwnerAccount ownerAccount = new OwnerAccount();
-                ownerAccount.setUsername(username);
-                ownerAccount.setPassword(password);
-                ownerAccount.setOwner(owner);
-
-                ownerAccountService.insertOwnerAccount(ownerAccount);// otdeli na metod
+                addOwnerToDB(firstName, lastName, username, password);
             }
 
             if(agentRadioButton.isSelected())
             {
-                Agent agent = new Agent();
-                agent.setFirstName(firstName);
-                agent.setLastName(lastName);
-
-                agentService.insertAgent(agent);
-
-                AgentAccount agentAccount = new AgentAccount();
-                agentAccount.setUsername(username);
-                agentAccount.setPassword(password);
-                agentAccount.setAgent(agent);
-
-                agentAccountService.insertAgentAccount(agentAccount);// otdeli na metod
+                addAgentToDB(firstName, lastName, username, password);
             }
 
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Registration message!");
-            alert.setHeaderText("Congratulations");
-            alert.setContentText("You registered successfully.");
-            alert.showAndWait();
+            successfulRegistrationAlert();
 
             Stage thisStage = method.getStage(mouseEvent);
 
             method.ChangeScene(thisStage,loginPath);
         }
+    }
+
+    private void successfulRegistrationAlert() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Registration message!");
+        alert.setHeaderText("Congratulations");
+        alert.setContentText("You registered successfully.");
+        alert.showAndWait();
+    }
+
+    private void addAgentToDB(String firstName, String lastName, String username, String password) {
+        Agent agent = new Agent();
+        agent.setFirstName(firstName);
+        agent.setLastName(lastName);
+        agent.setRating(0.0f);
+
+        agentService.insertAgent(agent);
+
+        AgentAccount agentAccount = new AgentAccount();
+        agentAccount.setUsername(username);
+        agentAccount.setPassword(password);
+        agentAccount.setAgent(agent);
+
+        agentAccountService.insertAgentAccount(agentAccount);
+    }
+
+    private void addOwnerToDB(String firstName, String lastName, String username, String password) {
+        Owner owner = new Owner();
+        owner.setFirstName(firstName);
+        owner.setLastName(lastName);
+
+        ownerService.insertOwner(owner);
+
+        OwnerAccount ownerAccount = new OwnerAccount();
+        ownerAccount.setUsername(username);
+        ownerAccount.setPassword(password);
+        ownerAccount.setOwner(owner);
+
+        ownerAccountService.insertOwnerAccount(ownerAccount);
     }
 
     @FXML
