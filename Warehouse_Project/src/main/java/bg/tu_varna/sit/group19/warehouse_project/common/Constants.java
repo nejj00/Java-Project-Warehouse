@@ -2,20 +2,13 @@ package bg.tu_varna.sit.group19.warehouse_project.common;
 
 public class Constants {
     public static class View{
-        public static final String HELLO_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentatoins.view/hello-view.fxml";
+        public static final  String HELLO_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentatoins.view/hello-view.fxml";
         public static final String LOGIN_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentatoins.view/login.fxml";
         public static final String MAIN_WINDOW_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentatoins.view/MainWindow.fxml";
         public static final String REGISTER_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentatoins.view/register.fxml";
         public static final String ADMIN_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentatoins.view/adminWindow.fxml";
-        public static final String AGENT_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentatoins.view/agentWindow.fxml";
-        public static final String OWNER_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentatoins.view/ownerWindow.fxml";
+        public static final String ADMIN_OWNERS_LIST_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentatoins.view/adminWindowOwners.fxml";
 
-    }
-
-    public static class AccountTypes {
-        public static final int Admin = 1;
-        public static final int Agent = 2;
-        public static final int Owner = 3;
     }
 
     public static class Configurations{
@@ -29,7 +22,7 @@ public class Constants {
     }
 
     public static class HibernateConfig{
-        public static final String CFG_FILE = "C:\\Users\\Radi_boy112\\Documents\\GitHub\\Java-Project-Warehouse\\Warehouse_Project\\src\\main\\resources\\bg\\tu_varna\\sit\\group19\\warehouse_project\\configuration\\hibernate.cfg.xml";
+        public static final String CFG_FILE = "E:/Projects/UNI/semester V/Java_Project/Project_Files/Warehouse_Project/src/main/resources/bg/tu_varna/sit/group19/warehouse_project/configuration/hibernate.cfg.xml";
     }
 
 }

@@ -2,6 +2,8 @@ package bg.tu_varna.sit.group19.warehouse_project.data.repositories;
 
 import bg.tu_varna.sit.group19.warehouse_project.data.access.Connection;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Admin;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -40,6 +42,7 @@ public class BaseRepository<T> implements DAORepository<T>{
             log.info("Saved successfully");
         }catch (Exception ex){
             log.error("Save error " + ex.getMessage());
+            showErrorBox("ERROR Saving record!");
         }finally {
             transaction.commit();
             Connection.openSessionClose();
@@ -55,11 +58,14 @@ public class BaseRepository<T> implements DAORepository<T>{
             log.info("Updated successfully");
         }catch (Exception ex){
             log.error("Update error " + ex.getMessage());
+            showErrorBox("ERROR Updating record!");
         }finally {
             transaction.commit();
             Connection.openSessionClose();
         }
     }
+
+
 
     @Override
     public void delete(T obj) {
@@ -70,6 +76,7 @@ public class BaseRepository<T> implements DAORepository<T>{
             log.info("Deleted successfully");
         }catch (Exception ex){
             log.error("Delete error " + ex.getMessage());
+            showErrorBox("ERROR Deleting record!");
         }finally {
             transaction.commit();
             Connection.openSessionClose();
@@ -85,6 +92,10 @@ public class BaseRepository<T> implements DAORepository<T>{
              obj = Optional.of(session.get(typeParameterClass, id));
         }catch (Exception ex){
             log.error("Failed getById " + ex.getMessage());
+            showErrorBox("ERROR Getting record!");
+        }finally {
+            transaction.commit();
+            Connection.openSessionClose();
         }
 
         return obj;
@@ -102,11 +113,17 @@ public class BaseRepository<T> implements DAORepository<T>{
             log.info("Got all tasks");
         }catch (Exception ex){
             log.error("Get Task error: " + ex.getMessage());
+            showErrorBox("ERROR Getting all records!");
         }finally {
             transaction.commit();
             Connection.openSessionClose();
         }
 
         return admins;
+    }
+
+    private void showErrorBox(String errorString) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, errorString);
+        alert.showAndWait();
     }
 }

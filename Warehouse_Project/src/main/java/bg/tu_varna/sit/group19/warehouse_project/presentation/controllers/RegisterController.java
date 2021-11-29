@@ -117,6 +117,8 @@ public class RegisterController implements EventHandler<MouseEvent> {
         }
     }
 
+
+
     private void successfulRegistrationAlert() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Registration message!");
