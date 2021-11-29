@@ -28,8 +28,9 @@ public class MainApplication extends Application {
         PropertyConfigurator.configure(MainApplication.class.getResource(Constants.Configurations.LOG4J_PROPERTIES));
         URL loginPath = getClass().getResource(Constants.View.LOGIN_VIEW);
         URL path = getClass().getResource(Constants.View.MAIN_WINDOW_VIEW);
-        URL test1path = getClass().getResource(Constants.View.HELLO_VIEW);
-        URL test2path = getClass().getResource(Constants.View.REGISTER_VIEW);
+        URL adminPath = getClass().getResource(Constants.View.ADMIN_VIEW);
+        URL agentPath = getClass().getResource(Constants.View.AGENT_VIEW);
+        URL ownerPath = getClass().getResource(Constants.View.OWNER_VIEW);
 
         if(loginPath != null && path != null){
 
@@ -42,8 +43,8 @@ public class MainApplication extends Application {
             mainStage.setTitle(Constants.Values.MAIN_TITILE);
             mainStage.setScene(mainScene);
             mainStage.setResizable(false);
-            mainStage.setWidth(800);
-            mainStage.setHeight(600);
+            mainStage.setWidth(1600);
+            mainStage.setHeight(900);
             mainStage.show();//load main screen
 
 
@@ -55,19 +56,29 @@ public class MainApplication extends Application {
             loginStage.showAndWait();//load login screen and waiting it to close
             //when it closes the account type will be saved in controller
 
-            //load to main screen first type account version
-            if(LoginController.AccountType==1) {
-                root = FXMLLoader.load(test2path);
-                Scene scene1 = new Scene(root);
-                mainStage.setScene(scene1);
-            }
-            //else load to main screen second type account version
-            else {
-                root = FXMLLoader.load(test1path);
-                Scene scene1 = new Scene(root);
-                mainStage.setScene(scene1);
-            }
 
+            switch(LoginController.AccountType) {
+                case Constants.AccountTypes.Admin: //load to main screen admin account version
+
+                    root = FXMLLoader.load(adminPath);
+                    Scene adminScene = new Scene(root);
+                    mainStage.setScene(adminScene);
+                    break;
+
+                case Constants.AccountTypes.Agent: //load to main screen agent account version
+
+                    root = FXMLLoader.load(agentPath);
+                    Scene agentScene = new Scene(root);
+                    mainStage.setScene(agentScene);
+                    break;
+
+                case Constants.AccountTypes.Owner: //load to main screen owner account version
+
+                    root = FXMLLoader.load(ownerPath);
+                    Scene ownerScene = new Scene(root);
+                    mainStage.setScene(ownerScene);
+                    break;
+            }
         }
         else {
             log.error("Sorry, the main fxml could not be loaded");
