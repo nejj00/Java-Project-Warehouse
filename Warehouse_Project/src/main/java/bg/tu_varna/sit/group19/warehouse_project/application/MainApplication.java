@@ -14,6 +14,8 @@ import org.apache.log4j.PropertyConfigurator;
 import java.io.IOException;
 import java.net.URL;
 
+import static bg.tu_varna.sit.group19.warehouse_project.presentation.controllers.LoginController.accountType;
+
 public class MainApplication extends Application {
 
     private static final Logger log = Logger.getLogger(MainApplication.class);
@@ -27,13 +29,14 @@ public class MainApplication extends Application {
 
         PropertyConfigurator.configure(MainApplication.class.getResource(Constants.Configurations.LOG4J_PROPERTIES));
         URL loginPath = getClass().getResource(Constants.View.LOGIN_VIEW);
-        URL path = getClass().getResource(Constants.View.MAIN_WINDOW_VIEW);
-        URL test1path = getClass().getResource(Constants.View.HELLO_VIEW);
-        URL test2path = getClass().getResource(Constants.View.REGISTER_VIEW);
+        URL registerPath = getClass().getResource(Constants.View.REGISTER_VIEW);
+        URL mainAdminPath = getClass().getResource(Constants.View.ADMIN_VIEW);
+        URL mainAgentPath = getClass().getResource(Constants.View.AGENT_VIEW);
+        URL mainOwnerPath = getClass().getResource(Constants.View.OWNER_VIEW);
 
-        if(loginPath != null && path != null){
+        if(loginPath != null && mainAdminPath != null && mainAgentPath!=null&& mainOwnerPath!=null&&registerPath!=null){
 
-            Parent root = FXMLLoader.load(path);
+            Parent root = FXMLLoader.load(mainAdminPath);
 
             Scene mainScene = new Scene(root);
             mainScene.setFill(Color.TRANSPARENT);
@@ -46,8 +49,6 @@ public class MainApplication extends Application {
             mainStage.setWidth(800);
             mainStage.setHeight(600);
             mainStage.show();//load main screen
-
-
              */
 
             //set second window scene
@@ -58,19 +59,24 @@ public class MainApplication extends Application {
             loginStage.showAndWait();//load login screen and waiting it to close
             //when it closes the account type will be saved in controller
 
-            //load to main screen first type account version
-            if(LoginController.AccountType==1) {
-                root = FXMLLoader.load(test2path);
-                Scene scene1 = new Scene(root);
-                mainStage.setScene(scene1);
-            }
-            //else load to main screen second type account version
-            else {
-                root = FXMLLoader.load(test1path);
-                Scene scene1 = new Scene(root);
-                mainStage.setScene(scene1);
-            }
 
+            switch (accountType.getAccountType()) {
+                case Admin -> {
+                    root = FXMLLoader.load(mainAdminPath);
+                    Scene admin = new Scene(root);
+                    mainStage.setScene(admin);
+                }
+                case Agent -> {
+                    root = FXMLLoader.load(mainAgentPath);
+                    Scene agent = new Scene(root);
+                    mainStage.setScene(agent);
+                }
+                case Owner -> {
+                    root = FXMLLoader.load(mainOwnerPath);
+                    Scene owner = new Scene(root);
+                    mainStage.setScene(owner);
+                }
+            }
         }
         else {
             log.error("Sorry, the main fxml could not be loaded");

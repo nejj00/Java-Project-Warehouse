@@ -1,7 +1,9 @@
 package bg.tu_varna.sit.group19.warehouse_project.presentation.controllers;
 
 import bg.tu_varna.sit.group19.warehouse_project.business.services.AdminAccountService;
+import bg.tu_varna.sit.group19.warehouse_project.business.services.AgentAccountService;
 import bg.tu_varna.sit.group19.warehouse_project.business.services.LoginServices;
+import bg.tu_varna.sit.group19.warehouse_project.business.services.OwnerAccountService;
 import bg.tu_varna.sit.group19.warehouse_project.business.utils.AccountChecker;
 import bg.tu_varna.sit.group19.warehouse_project.common.AccountTypeEnum;
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
@@ -39,7 +41,6 @@ public class LoginController implements EventHandler<MouseEvent> {
     private final LoginModel model;
     private final LoginServices services;
     private final Methods method;
-    public static int AccountType;
     public static AccountTypeEnum accountType = new AccountTypeEnum();
     public static Admin admin;
     public static Agent agent;
@@ -77,24 +78,26 @@ public class LoginController implements EventHandler<MouseEvent> {
         {
             LoginLabel.setText(model.getWrongMessage());
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Account DOES NOT exists or password is INCORRECT");
-            //alert.showAndWait();
+            alert.showAndWait();
             return;
         }
-        else
-        {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Account exists and password is correct");
-            //alert.showAndWait();
-            System.out.println(accountType.getAccountType().toString());
 
+
+        Stage thisStage = method.getStage(mouseEvent);
+        thisStage.hide();
+
+        switch (accountType.getAccountType()) {
+            case Admin -> openAdminWindow(username);
+            case Agent -> openAgentWindow(username);
+            case Owner -> openOwnerWindow(username);
         }
-
-        AccountType = 1;
+        /*
         Stage thisStage = method.getStage(mouseEvent);
         //method.ChangeScene(thisStage, userWindowPath);
         thisStage.hide();
         if(accountType.getAccountType() == AccountTypeEnum.AccountType.Admin)
             openAdminWindow(username);
-
+         */
     }
 
     private void openAdminWindow(String username) {
@@ -122,9 +125,58 @@ public class LoginController implements EventHandler<MouseEvent> {
         myStage.show();
     }
 
+    private void openAgentWindow(String username) {
+        Stage myStage = new Stage();
+
+        AgentAccountService agentAccountService = AgentAccountService.getInstance();
+        Agent agent = agentAccountService.getAgentByUsername(username);
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Constants.View.AGENT_VIEW));
+
+        Parent root = null;
+        try {
+            root = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        AgentWindowController controller = fxmlLoader.<AgentWindowController>getController();
+        controller.setUserFullName(agent.getFirstName() + " " + agent.getLastName());
+        controller.setAgent(agent);
+        assert root != null;
+        Scene scene = new Scene(root);
+
+        myStage.setScene(scene);
+
+        myStage.show();
+    }
+
+    private void openOwnerWindow(String username) {
+        Stage myStage = new Stage();
+
+        OwnerAccountService ownerAccountService = OwnerAccountService.getInstance();
+        Owner owner = ownerAccountService.getOwnerByUsername(username);
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Constants.View.OWNER_VIEW));
+
+        Parent root = null;
+        try {
+            root = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        OwnerWindowController controller = fxmlLoader.<OwnerWindowController>getController(); //!!!!!!!!! exception
+        controller.setUserFullName(owner.getFirstName() + " " + owner.getLastName());
+        controller.setOwner(owner);
+        assert root != null;
+        Scene scene = new Scene(root);
+
+        myStage.setScene(scene);
+
+        myStage.show();
+    }
+
     @FXML
     public void RegisterClicked(MouseEvent mouseEvent) {
-        AccountType = 0;
         Stage thisStage = method.getStage(mouseEvent);
 
         method.ChangeScene(thisStage,registerPath);
