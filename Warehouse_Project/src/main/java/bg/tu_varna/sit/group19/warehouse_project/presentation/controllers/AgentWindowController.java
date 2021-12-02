@@ -39,11 +39,11 @@ public class AgentWindowController implements EventHandler<MouseEvent> {
     }
 
     URL ownerListPath = getClass().getResource(Constants.View.ADMIN_OWNERS_LIST_VIEW);
-
+/*
     public void showOwnersClicked(MouseEvent mouseEvent) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource(Constants.View.ADMIN_OWNERS_LIST_VIEW));
         mainAnchorPane.getChildren().setAll(pane);
-    }
+    }*/
 
     @Override
     public void handle(MouseEvent mouseEvent) {

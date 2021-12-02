@@ -7,8 +7,8 @@ public class Constants {
         public static final String MAIN_WINDOW_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentatoins.view/MainWindow.fxml";
         public static final String REGISTER_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentatoins.view/register.fxml";
         public static final String ADMIN_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentatoins.view/adminWindow.fxml";
-        public static final String AGENT_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentatoins.view/adminWindow.fxml";
-        public static final String OWNER_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentatoins.view/adminWindow.fxml";
+        public static final String AGENT_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentatoins.view/agentWindow.fxml";
+        public static final String OWNER_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentatoins.view/ownerWindow.fxml";
         public static final String ADMIN_OWNERS_LIST_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentatoins.view/adminWindowOwners.fxml";
 
     }
