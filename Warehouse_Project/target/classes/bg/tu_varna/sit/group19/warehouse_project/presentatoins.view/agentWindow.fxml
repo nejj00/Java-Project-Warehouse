@@ -36,10 +36,10 @@
             <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="200.0">
                     <children>
-                        <Button layoutX="8.0" layoutY="442.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Show available warehouses" />
-                        <Button layoutX="8.0" layoutY="398.0" mnemonicParsing="false" onMouseClicked="#showOwnersClicked" prefHeight="30.0" prefWidth="180.0" text="Give warehouse on rent" />
-                        <Button layoutX="8.0" layoutY="483.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Show owner's warehouses" />
-                  <Button layoutX="8.0" layoutY="523.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Renter history" />
+                        <Button fx:id="ShowAvailableWarehousesButton" layoutX="8.0" layoutY="442.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Show available warehouses" />
+                        <Button fx:id="GiveWarehouseOnRentButton" layoutX="8.0" layoutY="398.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Give warehouse on rent" />
+                        <Button fx:id="ShowOwnersWarehousesButton" layoutX="8.0" layoutY="483.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Show owner's warehouses" />
+                  <Button fx:id="RentHistoryButton" layoutX="8.0" layoutY="523.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Renter history" />
                         <Label fx:id="userType" layoutX="8.0" prefHeight="17.0" prefWidth="74.0" text="Agent">
                             <font>
                                 <Font size="13.0" />
