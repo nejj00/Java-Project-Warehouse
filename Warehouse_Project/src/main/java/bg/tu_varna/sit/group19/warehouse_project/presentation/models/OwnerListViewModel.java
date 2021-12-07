@@ -9,6 +9,7 @@ public class OwnerListViewModel {
         this.lasName = lasName;
     }
 
+
     @Override
     public String toString() {
         return String.format("%s %s", firstName, lasName);

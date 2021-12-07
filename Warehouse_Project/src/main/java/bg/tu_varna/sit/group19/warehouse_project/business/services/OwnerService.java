@@ -41,4 +41,15 @@ public class OwnerService {
                         owner.getLastName()
                 )).collect(Collectors.toList()));
     }
+
+    public Owner getOwnerByName(String firstName,String lastName) {
+        List<Owner> owners = ownerRepository.getAll();
+
+        for (Owner o : owners){
+            if(o.getFirstName().equals(firstName)&&o.getLastName().equals(lastName))
+                return o;
+        }
+
+        return null;
+    }
 }
