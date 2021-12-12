@@ -29,6 +29,10 @@ public class OwnerAccountService {
         ownerAccountRepository.delete(ownerAccount);
     }
 
+    public OwnerAccount getOwnerAccountById(Long id){
+        return ownerAccountRepository.getById(id).get();
+    }
+
     public Owner getOwnerByUsername(String username){
         List<OwnerAccount> ownerAccounts = ownerAccountRepository.getAll();
         Owner owner = new Owner();

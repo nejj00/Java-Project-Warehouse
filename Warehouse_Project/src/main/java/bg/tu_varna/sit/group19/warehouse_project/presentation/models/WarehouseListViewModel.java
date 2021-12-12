@@ -18,9 +18,9 @@ public class WarehouseListViewModel {
 
     public WarehouseListViewModel(double Size, String FirtsName, String LastName, String WarehouseType, String WarehouseStatus) {
         this.size=Size;
-        this.owner = ownerService.getOwnerByName(FirtsName,LastName);
-        this.type = warehouseTypeService.getWarehouseType(WarehouseType);
-        this.status = warehouseStatusService.getWarehouseStatusByStatus(WarehouseStatus);
+        this.owner = ownerService.getOwnerByName(FirtsName,LastName); // тук не мисля че трябва да се викат service класове
+        this.type = warehouseTypeService.getWarehouseType(WarehouseType); // просто се задават стойностите от параметрире
+        this.status = warehouseStatusService.getWarehouseStatusByStatus(WarehouseStatus); // а самите стойности се взимат в service класа
     }
 
     @Override

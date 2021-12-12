@@ -1,6 +1,6 @@
 package bg.tu_varna.sit.group19.warehouse_project.business.utils;
 
-import bg.tu_varna.sit.group19.warehouse_project.common.AccountTypeEnum;
+import bg.tu_varna.sit.group19.warehouse_project.common.Enums;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.AdminAccount;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.AgentAccount;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.OwnerAccount;
@@ -43,22 +43,22 @@ public class AccountChecker {
     }
 
 
-    public boolean checkPassword(String username, String password, AccountTypeEnum accountTypeEnum){
+    public boolean checkPassword(String username, String password, Enums enums){
         for (AdminAccount adminAccount : adminAccounts) {
             if(username.equals(adminAccount.getUsername()) && password.equals(adminAccount.getPassword())) {
-                accountTypeEnum.setAccountType(AccountTypeEnum.AccountType.Admin);
+                enums.setAccountType(Enums.AccountType.Admin);
                 return true;
             }
         }
         for (OwnerAccount ownerAccount : ownerAccounts) {
             if(username.equals(ownerAccount.getUsername()) && password.equals(ownerAccount.getPassword())) {
-                accountTypeEnum.setAccountType(AccountTypeEnum.AccountType.Owner);
+                enums.setAccountType(Enums.AccountType.Owner);
                 return true;
             }
         }
         for (AgentAccount agentAccount : agentAccounts) {
             if(username.equals(agentAccount.getUsername()) && password.equals(agentAccount.getPassword())) {
-                accountTypeEnum.setAccountType(AccountTypeEnum.AccountType.Agent);
+                enums.setAccountType(Enums.AccountType.Agent);
                 return true;
             }
         }

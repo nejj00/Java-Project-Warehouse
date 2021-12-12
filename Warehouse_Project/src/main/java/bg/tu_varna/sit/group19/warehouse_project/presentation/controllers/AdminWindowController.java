@@ -1,6 +1,8 @@
 package bg.tu_varna.sit.group19.warehouse_project.presentation.controllers;
 
+import bg.tu_varna.sit.group19.warehouse_project.business.holders.EnumHolder;
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
+import bg.tu_varna.sit.group19.warehouse_project.common.Enums;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Admin;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -21,8 +23,9 @@ public class AdminWindowController implements EventHandler<MouseEvent> {
     @FXML
     private AnchorPane mainAnchorPane;
 
-
     private Admin admin;
+
+    private EnumHolder enumHolder = EnumHolder.getInstance();
 
     public void setAdmin(Admin admin) {
         this.admin = admin;
@@ -37,10 +40,17 @@ public class AdminWindowController implements EventHandler<MouseEvent> {
         //userFullName.setText("Random Text " + admin.getFirstName());
     }
 
-    URL ownerListPath = getClass().getResource(Constants.View.ADMIN_OWNERS_LIST_VIEW);
+    URL userListPath = getClass().getResource(Constants.View.ADMIN_OWNERS_LIST_VIEW);
 
     public void showOwnersClicked(MouseEvent mouseEvent) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource(Constants.View.ADMIN_OWNERS_LIST_VIEW));
+        enumHolder.setAccountType(Enums.AccountType.Owner);
+        AnchorPane pane = FXMLLoader.load(userListPath);
+        mainAnchorPane.getChildren().setAll(pane);
+    }
+
+    public void showAgentsClicked(MouseEvent mouseEvent) throws IOException {
+        enumHolder.setAccountType(Enums.AccountType.Agent);
+        AnchorPane pane = FXMLLoader.load(userListPath);
         mainAnchorPane.getChildren().setAll(pane);
     }
 

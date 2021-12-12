@@ -37,7 +37,7 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="200.0">
                <children>
                   <Button layoutX="8.0" layoutY="398.0" mnemonicParsing="false" onMouseClicked="#showOwnersClicked" prefHeight="30.0" prefWidth="180.0" text="Show Owners" />
-                  <Button layoutX="8.0" layoutY="442.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Show Agents" />
+                  <Button layoutX="8.0" layoutY="442.0" mnemonicParsing="false" onMouseClicked="#showAgentsClicked" prefHeight="30.0" prefWidth="180.0" text="Show Agents" />
                   <Button layoutX="8.0" layoutY="483.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Button" />
                   <Label fx:id="userType" layoutX="8.0" prefHeight="17.0" prefWidth="74.0" text="Admin">
                      <font>

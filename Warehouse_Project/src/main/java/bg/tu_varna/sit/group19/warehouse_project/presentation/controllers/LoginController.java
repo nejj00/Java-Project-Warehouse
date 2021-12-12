@@ -5,7 +5,7 @@ import bg.tu_varna.sit.group19.warehouse_project.business.services.AgentAccountS
 import bg.tu_varna.sit.group19.warehouse_project.business.services.LoginServices;
 import bg.tu_varna.sit.group19.warehouse_project.business.services.OwnerAccountService;
 import bg.tu_varna.sit.group19.warehouse_project.business.utils.AccountChecker;
-import bg.tu_varna.sit.group19.warehouse_project.common.AccountTypeEnum;
+import bg.tu_varna.sit.group19.warehouse_project.common.Enums;
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
 import bg.tu_varna.sit.group19.warehouse_project.common.Methods;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Admin;
@@ -41,7 +41,7 @@ public class LoginController implements EventHandler<MouseEvent> {
     private final LoginModel model;
     private final LoginServices services;
     private final Methods method;
-    public static AccountTypeEnum accountType = new AccountTypeEnum();
+    public static Enums accountType = new Enums();
     public static Admin admin;
     public static Agent agent;
     public static Owner owner;
@@ -81,7 +81,6 @@ public class LoginController implements EventHandler<MouseEvent> {
             alert.showAndWait();
             return;
         }
-
 
         Stage thisStage = method.getStage(mouseEvent);
         thisStage.hide();

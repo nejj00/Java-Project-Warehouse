@@ -1,9 +1,6 @@
 package bg.tu_varna.sit.group19.warehouse_project.business.services;
 
-import bg.tu_varna.sit.group19.warehouse_project.data.entities.Admin;
-import bg.tu_varna.sit.group19.warehouse_project.data.entities.AdminAccount;
-import bg.tu_varna.sit.group19.warehouse_project.data.entities.Agent;
-import bg.tu_varna.sit.group19.warehouse_project.data.entities.AgentAccount;
+import bg.tu_varna.sit.group19.warehouse_project.data.entities.*;
 import bg.tu_varna.sit.group19.warehouse_project.data.repositories.AgentAccountRepository;
 
 import java.util.List;
@@ -29,6 +26,10 @@ public class AgentAccountService {
 
     public void deleteAgentAccount(AgentAccount agentAccount){
         agentAccountRepository.delete(agentAccount);
+    }
+
+    public AgentAccount getAgentAccountById(Long id){
+        return agentAccountRepository.getById(id).get();
     }
 
     public Agent getAgentByUsername(String username){
