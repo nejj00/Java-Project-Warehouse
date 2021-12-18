@@ -4,6 +4,8 @@ import bg.tu_varna.sit.group19.warehouse_project.common.Enums;
 
 public class EnumHolder {
     private Enums.AccountType accountType;
+    private Enums.OpenMode openMode;
+
     private final static EnumHolder INSTANCE = new EnumHolder();
 
     private EnumHolder() {}
@@ -18,5 +20,13 @@ public class EnumHolder {
 
     public Enums.AccountType getAccountType() {
         return this.accountType;
+    }
+
+    public Enums.OpenMode getOpenMode() {
+        return openMode;
+    }
+
+    public void setOpenMode(Enums.OpenMode openMode) {
+        this.openMode = openMode;
     }
 }

@@ -8,23 +8,68 @@ import bg.tu_varna.sit.group19.warehouse_project.data.entities.WarehouseStatus;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.WarehouseType;
 
 public class WarehouseListViewModel {
-    private double size;
+    private Long WarehouseID;
+    private float size;
+    private String warehouseAddress;
     private Owner owner;
-    private OwnerService ownerService;
     private WarehouseType type;
-    private WarehouseTypeService warehouseTypeService;
     private WarehouseStatus status;
-    private WarehouseStatusService warehouseStatusService;
 
-    public WarehouseListViewModel(double Size, String FirtsName, String LastName, String WarehouseType, String WarehouseStatus) {
+    public WarehouseListViewModel(Long ID, float Size, String warehouseAddress, Owner owner, WarehouseType warehouseType, WarehouseStatus warehouseStatus) {
+        this.WarehouseID = ID;
         this.size=Size;
-        this.owner = ownerService.getOwnerByName(FirtsName,LastName); // тук не мисля че трябва да се викат service класове
-        this.type = warehouseTypeService.getWarehouseType(WarehouseType); // просто се задават стойностите от параметрире
-        this.status = warehouseStatusService.getWarehouseStatusByStatus(WarehouseStatus); // а самите стойности се взимат в service класа
+        this.warehouseAddress = warehouseAddress;
+        this.owner = owner;
+        this.type = warehouseType;
+        this.status = warehouseStatus;
     }
 
     @Override
     public String toString() {
-        return String.format("%f %s %s %s %s",size,owner.getFirstName(),owner.getLastName(),type.getType(),status.getStatus());
+        return String.format("%s | %f", warehouseAddress, size);
+    }
+
+    public Long getWarehouseID() {
+        return WarehouseID;
+    }
+
+    public float getSize() {
+        return size;
+    }
+
+    public void setSize(float size) {
+        this.size = size;
+    }
+
+    public String getWarehouseAddress() {
+        return warehouseAddress;
+    }
+
+    public void setWarehouseAddress(String warehouseAddress) {
+        this.warehouseAddress = warehouseAddress;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
+
+    public WarehouseType getType() {
+        return type;
+    }
+
+    public void setType(WarehouseType type) {
+        this.type = type;
+    }
+
+    public WarehouseStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(WarehouseStatus status) {
+        this.status = status;
     }
 }

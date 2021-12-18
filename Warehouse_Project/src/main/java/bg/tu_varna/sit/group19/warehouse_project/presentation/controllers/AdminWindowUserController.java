@@ -70,15 +70,15 @@ public class AdminWindowUserController implements EventHandler<MouseEvent> {
     }
 
     private void menuDeleteAction() {
-        ButtonType foo = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
-        ButtonType bar = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType yesDelete = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType noDelete = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
         Alert alert = new Alert(Alert.AlertType.WARNING,
-                "Are you sure you want to delete this record.", foo, bar);
+                "Are you sure you want to delete this record.", yesDelete, noDelete);
 
         alert.setTitle("Deletion Warning");
         Optional<ButtonType> result = alert.showAndWait();
 
-        if (result.orElse(bar) != foo)
+        if (result.orElse(noDelete) != yesDelete)
             return;
 
         if(enumHolder.getAccountType() == Enums.AccountType.Owner)

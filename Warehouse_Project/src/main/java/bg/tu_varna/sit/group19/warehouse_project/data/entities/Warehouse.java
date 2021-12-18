@@ -13,6 +13,9 @@ public class Warehouse {
     @Column(name = "ID", nullable = false)
     private long id;
 
+    @Column(name = "WarehouseAddress", nullable = false)
+    private String WarehouseAddress;
+
     @Column(name = "Size", nullable = false)
     private float size;
 
@@ -45,6 +48,14 @@ public class Warehouse {
 
     public void setSize(float size) {
         this.size = size;
+    }
+
+    public String getWarehouseAddress() {
+        return WarehouseAddress;
+    }
+
+    public void setWarehouseAddress(String warehouseAddress) {
+        WarehouseAddress = warehouseAddress;
     }
 
     public Owner getOwner() {

@@ -3,6 +3,7 @@ package bg.tu_varna.sit.group19.warehouse_project.presentation.controllers;
 import bg.tu_varna.sit.group19.warehouse_project.business.holders.EnumHolder;
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
 import bg.tu_varna.sit.group19.warehouse_project.common.Enums;
+import bg.tu_varna.sit.group19.warehouse_project.common.ScenePaneSwitcher;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Admin;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -52,6 +54,13 @@ public class AdminWindowController implements EventHandler<MouseEvent> {
         enumHolder.setAccountType(Enums.AccountType.Agent);
         AnchorPane pane = FXMLLoader.load(userListPath);
         mainAnchorPane.getChildren().setAll(pane);
+    }
+
+    public void logOutClicked(MouseEvent mouseEvent){
+        ScenePaneSwitcher method = new ScenePaneSwitcher();
+        URL loginPath = getClass().getResource(Constants.View.LOGIN_VIEW);
+        Stage thisStage = method.getStage(mouseEvent);
+        method.ChangeScene(thisStage, loginPath);
     }
 
     @Override

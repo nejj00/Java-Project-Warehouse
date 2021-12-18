@@ -8,7 +8,7 @@ import bg.tu_varna.sit.group19.warehouse_project.business.services.OwnerService;
 import bg.tu_varna.sit.group19.warehouse_project.business.utils.AccountChecker;
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
 import bg.tu_varna.sit.group19.warehouse_project.common.Enums;
-import bg.tu_varna.sit.group19.warehouse_project.common.Methods;
+import bg.tu_varna.sit.group19.warehouse_project.common.ScenePaneSwitcher;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Agent;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.AgentAccount;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Owner;
@@ -17,7 +17,6 @@ import bg.tu_varna.sit.group19.warehouse_project.presentation.models.RegisterMod
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -103,7 +102,7 @@ public class RegisterController implements EventHandler<MouseEvent> {
 
     URL loginPath = getClass().getResource(Constants.View.LOGIN_VIEW);
     private final RegisterModel model;
-    private final Methods method;
+    private final ScenePaneSwitcher scenePaneSwitcher;
 
     OwnerService ownerService = OwnerService.getInstance();
     OwnerAccountService ownerAccountService = OwnerAccountService.getInstance();
@@ -114,7 +113,7 @@ public class RegisterController implements EventHandler<MouseEvent> {
 
     public RegisterController() {
         this.model=new RegisterModel();
-        this.method=new Methods();
+        this.scenePaneSwitcher =new ScenePaneSwitcher();
     }
 
     @FXML
@@ -155,27 +154,28 @@ public class RegisterController implements EventHandler<MouseEvent> {
             {
                 if(openMode == Enums.OpenMode.UpdateMode && enumHolder.getAccountType() == Enums.AccountType.Owner)
                     updateOwnerToDB(userID, firstName, lastName, username, password);
-                else if(openMode == Enums.OpenMode.UpdateMode && enumHolder.getAccountType() == Enums.AccountType.Agent)
-                    updateAgentToDB(userID, firstName, lastName, username, password);
                 else
                     addOwnerToDB(firstName, lastName, username, password);
             }
 
             if(agentRadioButton.isSelected())
             {
-                addAgentToDB(firstName, lastName, username, password);
+                if(openMode == Enums.OpenMode.UpdateMode && enumHolder.getAccountType() == Enums.AccountType.Agent)
+                    updateAgentToDB(userID, firstName, lastName, username, password);
+                else
+                    addAgentToDB(firstName, lastName, username, password);
             }
 
             successfulRegistrationAlert();
 
-            Stage thisStage = method.getStage(mouseEvent);
+            Stage thisStage = scenePaneSwitcher.getStage(mouseEvent);
 
             if(openMode == Enums.OpenMode.InsertMode || openMode == Enums.OpenMode.UpdateMode) {
                 AnchorPane anchorPane = getListViewPane();
                 registerPane.getChildren().setAll(anchorPane);
             }
             else
-                method.ChangeScene(thisStage, loginPath);
+                scenePaneSwitcher.ChangeScene(thisStage, loginPath);
         }
     }
 
@@ -250,7 +250,7 @@ public class RegisterController implements EventHandler<MouseEvent> {
 
     @FXML
     public void CancelClicked(MouseEvent mouseEvent){
-        Stage thisStage = method.getStage(mouseEvent);
+        Stage thisStage = scenePaneSwitcher.getStage(mouseEvent);
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Constants.View.ADMIN_OWNERS_LIST_VIEW));
         AnchorPane pane = null;
@@ -260,7 +260,7 @@ public class RegisterController implements EventHandler<MouseEvent> {
             registerPane.getChildren().setAll(anchorPane);
         }
         else
-            method.ChangeScene(thisStage, loginPath);
+            scenePaneSwitcher.ChangeScene(thisStage, loginPath);
     }
 
     private AnchorPane getListViewPane() {

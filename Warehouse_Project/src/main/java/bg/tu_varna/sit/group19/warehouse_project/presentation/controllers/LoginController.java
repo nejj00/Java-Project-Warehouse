@@ -7,7 +7,7 @@ import bg.tu_varna.sit.group19.warehouse_project.business.services.OwnerAccountS
 import bg.tu_varna.sit.group19.warehouse_project.business.utils.AccountChecker;
 import bg.tu_varna.sit.group19.warehouse_project.common.Enums;
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
-import bg.tu_varna.sit.group19.warehouse_project.common.Methods;
+import bg.tu_varna.sit.group19.warehouse_project.common.ScenePaneSwitcher;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Admin;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Agent;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Owner;
@@ -40,7 +40,7 @@ public class LoginController implements EventHandler<MouseEvent> {
 
     private final LoginModel model;
     private final LoginServices services;
-    private final Methods method;
+    private final ScenePaneSwitcher method;
     public static Enums accountType = new Enums();
     public static Admin admin;
     public static Agent agent;
@@ -52,7 +52,7 @@ public class LoginController implements EventHandler<MouseEvent> {
     AccountChecker accountChecker = new AccountChecker();
 
     public LoginController() {
-        this.method = new Methods();
+        this.method = new ScenePaneSwitcher();
         this.model = new LoginModel();
         this.services = new LoginServices();
     }

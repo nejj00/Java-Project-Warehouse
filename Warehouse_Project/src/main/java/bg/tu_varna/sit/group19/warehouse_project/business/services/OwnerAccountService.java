@@ -38,7 +38,7 @@ public class OwnerAccountService {
         Owner owner = new Owner();
 
         for (OwnerAccount account: ownerAccounts) {
-            if(account.getUsername() == username)
+            if(account.getUsername().equals(username))
                 owner = account.getOwner();
         }
 
