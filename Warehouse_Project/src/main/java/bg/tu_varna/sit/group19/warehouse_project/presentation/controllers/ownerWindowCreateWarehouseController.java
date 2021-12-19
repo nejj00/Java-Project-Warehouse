@@ -63,7 +63,7 @@ public class ownerWindowCreateWarehouseController {
     private void InitControls() {
         NameLabel.setText(warehouseHolder.getOwner().getFirstName() + " " + warehouseHolder.getOwner().getLastName());
 
-        for (String s : Arrays.asList("taken", "free")) {
+        for (String s : Arrays.asList("Taken", "Free")) {
             statusComboBox.getItems().add(s);
         }
 
