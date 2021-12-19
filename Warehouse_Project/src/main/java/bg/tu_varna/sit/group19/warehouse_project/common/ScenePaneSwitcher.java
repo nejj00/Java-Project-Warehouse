@@ -39,4 +39,20 @@ public class ScenePaneSwitcher {
 
         return pane;
     }
+
+    public static void openNewStage(URL path) {
+        Stage myStage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(path);
+        Parent root = null;
+        try {
+            root = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assert root != null;
+        Scene scene = new Scene(root);
+        myStage.setScene(scene);
+        myStage.showAndWait();
+    }
+
 }

@@ -3,7 +3,9 @@ package bg.tu_varna.sit.group19.warehouse_project.presentation.controllers;
 import bg.tu_varna.sit.group19.warehouse_project.business.holders.EnumHolder;
 import bg.tu_varna.sit.group19.warehouse_project.business.holders.WarehouseHolder;
 import bg.tu_varna.sit.group19.warehouse_project.business.services.WarehouseService;
+import bg.tu_varna.sit.group19.warehouse_project.business.services.WarehouseWithRoomsService;
 import bg.tu_varna.sit.group19.warehouse_project.business.utils.ListContextMenu;
+import bg.tu_varna.sit.group19.warehouse_project.business.utils.WarehouseWithRooms;
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
 import bg.tu_varna.sit.group19.warehouse_project.common.Enums;
 import bg.tu_varna.sit.group19.warehouse_project.common.ScenePaneSwitcher;
@@ -80,6 +82,7 @@ public class OwnerWindowListController implements EventHandler<MouseEvent> {
         mainAnchorPane.getChildren().setAll(ScenePaneSwitcher.getPaneToSwitchTo(pathCreateWarehouse));
     }
 
+    private WarehouseWithRoomsService warehouseWithRoomsService = WarehouseWithRoomsService.getInstance();
     private void menuDeleteAction() {
         ButtonType yesDelete = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
         ButtonType noDelete = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -97,7 +100,11 @@ public class OwnerWindowListController implements EventHandler<MouseEvent> {
         WarehouseListViewModel warehouseListViewModel = warehouseList.get(selectedIndex);
         Warehouse warehouse = warehouseService.getWarehouseById(warehouseListViewModel.getWarehouseID());
 
-        warehouseService.deleteWarehouse(warehouse);
+        WarehouseWithRooms warehouseWithRooms = new WarehouseWithRooms();
+        warehouseWithRooms.setWarehouse(warehouse);
+        warehouseWithRooms.setWarehouseRooms(warehouseWithRoomsService.getRoomsListByID(warehouse.getId()));
+
+        warehouseWithRoomsService.deleteWarehouseWithRooms(warehouseWithRooms);
 
         warehouseListView.getItems().remove(selectedIndex);
     }

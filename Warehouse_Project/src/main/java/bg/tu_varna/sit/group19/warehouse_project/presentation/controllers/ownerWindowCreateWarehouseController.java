@@ -2,23 +2,31 @@ package bg.tu_varna.sit.group19.warehouse_project.presentation.controllers;
 
 import bg.tu_varna.sit.group19.warehouse_project.business.holders.EnumHolder;
 import bg.tu_varna.sit.group19.warehouse_project.business.holders.WarehouseHolder;
-import bg.tu_varna.sit.group19.warehouse_project.business.services.WarehouseService;
-import bg.tu_varna.sit.group19.warehouse_project.business.services.WarehouseStatusService;
-import bg.tu_varna.sit.group19.warehouse_project.business.services.WarehouseTypeService;
+import bg.tu_varna.sit.group19.warehouse_project.business.holders.WarehouseRoomHolder;
+import bg.tu_varna.sit.group19.warehouse_project.business.holders.WarehouseWithRoomsHolder;
+import bg.tu_varna.sit.group19.warehouse_project.business.services.*;
 import bg.tu_varna.sit.group19.warehouse_project.business.utils.ListContextMenu;
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
 import bg.tu_varna.sit.group19.warehouse_project.common.Enums;
 import bg.tu_varna.sit.group19.warehouse_project.common.ScenePaneSwitcher;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.*;
+import bg.tu_varna.sit.group19.warehouse_project.presentation.models.WarehouseRoomListViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.ParallelCamera;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.List;
 
 public class ownerWindowCreateWarehouseController {
     @FXML
@@ -44,6 +52,8 @@ public class ownerWindowCreateWarehouseController {
 
     private WarehouseHolder warehouseHolder = WarehouseHolder.getInstance();
 
+    private WarehouseRoomHolder warehouseRoomHolder = WarehouseRoomHolder.getInstance();
+
     private final WarehouseTypeService warehouseTypeService = WarehouseTypeService.getInstance();
     private final WarehouseStatusService warehouseStatusService = WarehouseStatusService.getInstance();
 
@@ -55,9 +65,55 @@ public class ownerWindowCreateWarehouseController {
         CreateButton.setOnMouseClicked(this::CreateClicked);
         CancelButton.setOnMouseClicked(this::CancelClicked);
 
-        warehouseRoomsListView.setContextMenu(listContextMenu.getMyContext());
+        InitListView();
 
         InitControls();
+    }
+
+    private final WarehouseRoomService warehouseRoomService = WarehouseRoomService.getInstance();
+    private final WarehouseWithRoomsService warehouseWithRoomsService = WarehouseWithRoomsService.getInstance();
+
+    private void InitListView() {
+
+        if(enumHolder.getOpenMode() == Enums.OpenMode.UpdateMode)
+            warehouseRoomsListView.setItems(warehouseWithRoomsService.getRoomsByID(warehouseHolder.getID()));
+
+        warehouseRoomsListView.setContextMenu(listContextMenu.getMyContext());
+
+        listContextMenu.getMenuItemInsert().setOnAction((event)->{
+            menuInsertRoomAction();
+        });
+
+        listContextMenu.getMenuItemUpdate().setOnAction((event) ->{
+            menuUpdateRoomAction();
+        });
+
+        listContextMenu.getMenuItemDelete().setOnAction((event)->{
+            menuDeleteRoomAction();
+        });
+    }
+
+    private final URL pathWarehouseRoom = getClass().getResource(Constants.View.WAREHOUSE_ROOMS_VIEW);
+    private WarehouseWithRoomsHolder warehouseWithRoomsHolder = WarehouseWithRoomsHolder.getInstance();
+
+    private void menuDeleteRoomAction() {
+
+    }
+
+    private void menuUpdateRoomAction() {
+
+    }
+
+    private void menuInsertRoomAction() {
+        warehouseRoomHolder.setWarehouseRoomsOpenMode(Enums.OpenMode.InsertMode);
+        ScenePaneSwitcher.openNewStage(pathWarehouseRoom);
+        List<WarehouseRoom> warehouseRooms = warehouseWithRoomsHolder.getWarehouseWithRooms().getRooms();
+        WarehouseRoom warehouseRoom = warehouseRooms.get(warehouseRooms.size() - 1);
+
+        WarehouseRoomListViewModel warehouseRoomListViewModel = new WarehouseRoomListViewModel(
+                warehouseRoom.getId(), warehouseRoom.getSize(), warehouseRoom.getPrice(), warehouseRoom.getCondition());
+
+        warehouseRoomsListView.getItems().add(warehouseRoomListViewModel);
     }
 
     private void InitControls() {
@@ -98,6 +154,7 @@ public class ownerWindowCreateWarehouseController {
 
         alertWarehouseAdded();
 
+        warehouseWithRoomsHolder.getWarehouseWithRooms().getRooms().clear();
         mainAnchorPane.getChildren().setAll(ScenePaneSwitcher.getPaneToSwitchTo(pathWarehouseList));
     }
 
@@ -122,6 +179,8 @@ public class ownerWindowCreateWarehouseController {
         alert.showAndWait();
     }
 
+
+
     private void insertWarehouseToDb(float size, String address, String type, String status) {
         WarehouseType warehouseType = warehouseTypeService.getWarehouseType(type);
 
@@ -134,10 +193,13 @@ public class ownerWindowCreateWarehouseController {
         warehouse.setStatus(warehouseStatus);
         warehouse.setType(warehouseType);
 
-        warehouseService.insertWarehouse(warehouse);
+        warehouseWithRoomsHolder.getWarehouseWithRooms().setWarehouse(warehouse);
+        warehouseWithRoomsService.insertWarehouseWithRooms(warehouseWithRoomsHolder.getWarehouseWithRooms());
+
     }
 
     private void CancelClicked(MouseEvent mouseEvent) {
+        warehouseWithRoomsHolder.getWarehouseWithRooms().getRooms().clear();
         mainAnchorPane.getChildren().setAll(ScenePaneSwitcher.getPaneToSwitchTo(pathWarehouseList));
 
     }
