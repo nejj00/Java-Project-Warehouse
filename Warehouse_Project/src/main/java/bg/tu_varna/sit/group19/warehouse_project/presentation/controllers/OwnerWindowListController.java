@@ -71,6 +71,7 @@ public class OwnerWindowListController implements EventHandler<MouseEvent> {
         ObservableList<WarehouseListViewModel> warehouseList = warehouseService.getAllWarehouses();
         WarehouseListViewModel warehouseListViewModel = warehouseList.get(warehouseListView.getSelectionModel().getSelectedIndex());
 
+        warehouseHolder.setID(warehouseListViewModel.getWarehouseID());
         warehouseHolder.setSize(warehouseListViewModel.getSize());
         warehouseHolder.setAddress(warehouseListViewModel.getWarehouseAddress());
         warehouseHolder.setWarehouseType(warehouseListViewModel.getType());
@@ -91,11 +92,14 @@ public class OwnerWindowListController implements EventHandler<MouseEvent> {
         if (result.orElse(noDelete) != yesDelete)
             return;
 
+        int selectedIndex = warehouseListView.getSelectionModel().getSelectedIndex();
         ObservableList<WarehouseListViewModel> warehouseList = warehouseService.getAllWarehouses();
-        WarehouseListViewModel warehouseListViewModel = warehouseList.get(warehouseListView.getSelectionModel().getSelectedIndex());
+        WarehouseListViewModel warehouseListViewModel = warehouseList.get(selectedIndex);
         Warehouse warehouse = warehouseService.getWarehouseById(warehouseListViewModel.getWarehouseID());
 
         warehouseService.deleteWarehouse(warehouse);
+
+        warehouseListView.getItems().remove(selectedIndex);
     }
 
     @Override

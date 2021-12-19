@@ -5,6 +5,7 @@ import bg.tu_varna.sit.group19.warehouse_project.business.holders.WarehouseHolde
 import bg.tu_varna.sit.group19.warehouse_project.business.services.WarehouseService;
 import bg.tu_varna.sit.group19.warehouse_project.business.services.WarehouseStatusService;
 import bg.tu_varna.sit.group19.warehouse_project.business.services.WarehouseTypeService;
+import bg.tu_varna.sit.group19.warehouse_project.business.utils.ListContextMenu;
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
 import bg.tu_varna.sit.group19.warehouse_project.common.Enums;
 import bg.tu_varna.sit.group19.warehouse_project.common.ScenePaneSwitcher;
@@ -31,11 +32,11 @@ public class ownerWindowCreateWarehouseController {
     @FXML
     public Label NameLabel;
     @FXML
-    public Label FamilyLabel;
-    @FXML
     public Button CreateButton;
     @FXML
     public Button CancelButton;
+    @FXML
+    public ListView warehouseRoomsListView;
     @FXML
     public AnchorPane mainAnchorPane;
 
@@ -46,21 +47,21 @@ public class ownerWindowCreateWarehouseController {
     private final WarehouseTypeService warehouseTypeService = WarehouseTypeService.getInstance();
     private final WarehouseStatusService warehouseStatusService = WarehouseStatusService.getInstance();
 
+    private final ListContextMenu listContextMenu = new ListContextMenu();
+
+
     @FXML
     private void initialize(){
         CreateButton.setOnMouseClicked(this::CreateClicked);
         CancelButton.setOnMouseClicked(this::CancelClicked);
 
-        NameLabel.setText(warehouseHolder.getOwner().getFirstName());
-        FamilyLabel.setText(warehouseHolder.getOwner().getLastName());
+        warehouseRoomsListView.setContextMenu(listContextMenu.getMyContext());
 
-        if(enumHolder.getOpenMode() == Enums.OpenMode.UpdateMode)
-        {
-            SizeTextField.setText(String.valueOf(warehouseHolder.getSize()));
-            addressTextArea.setText(warehouseHolder.getAddress());
-            statusComboBox.getSelectionModel().select(warehouseHolder.getWarehouseStatus().getStatus());
-            typeComboBox.getSelectionModel().select(warehouseHolder.getWarehouseType().getType());
-        }
+        InitControls();
+    }
+
+    private void InitControls() {
+        NameLabel.setText(warehouseHolder.getOwner().getFirstName() + " " + warehouseHolder.getOwner().getLastName());
 
         for (String s : Arrays.asList("taken", "free")) {
             statusComboBox.getItems().add(s);
@@ -70,12 +71,18 @@ public class ownerWindowCreateWarehouseController {
             typeComboBox.getItems().add(type.getType());
         }
 
-
+        if(enumHolder.getOpenMode() == Enums.OpenMode.UpdateMode)
+        {
+            SizeTextField.setText(String.valueOf(warehouseHolder.getSize()));
+            addressTextArea.setText(warehouseHolder.getAddress());
+            statusComboBox.getSelectionModel().select(warehouseHolder.getWarehouseStatus().getStatus());
+            typeComboBox.getSelectionModel().select(warehouseHolder.getWarehouseType().getType());
+        }
     }
 
     private final WarehouseService warehouseService = WarehouseService.getInstance();
 
-    URL pathWarehouseList = getClass().getResource(Constants.View.WAREHOUSES_LIST_VIEW);
+    private final URL pathWarehouseList = getClass().getResource(Constants.View.WAREHOUSES_LIST_VIEW);
 
     private void CreateClicked(MouseEvent mouseEvent) {
         float size = Float.parseFloat(SizeTextField.getText());
@@ -85,14 +92,26 @@ public class ownerWindowCreateWarehouseController {
 
         if(enumHolder.getOpenMode() == Enums.OpenMode.InsertMode)
             insertWarehouseToDb(size, address, type, status);
-        else
-        {
 
-        }
+        if(enumHolder.getOpenMode() == Enums.OpenMode.UpdateMode)
+            updateWarehouseDb(size, address);
 
         alertWarehouseAdded();
 
         mainAnchorPane.getChildren().setAll(ScenePaneSwitcher.getPaneToSwitchTo(pathWarehouseList));
+    }
+
+    private void updateWarehouseDb(float size, String address) {
+        WarehouseType warehouseType = warehouseTypeService.getWarehouseType(warehouseHolder.getWarehouseType().getType());
+        WarehouseStatus warehouseStatus = warehouseStatusService.getWarehouseStatusByStatus(warehouseHolder.getWarehouseStatus().getStatus());
+        Warehouse warehouse = warehouseService.getWarehouseById(warehouseHolder.getID());
+
+        warehouse.setSize(size);
+        warehouse.setWarehouseAddress(address);
+        warehouse.setStatus(warehouseStatus);
+        warehouse.setType(warehouseType);
+
+        warehouseService.updateWarehouse(warehouse);
     }
 
     private void alertWarehouseAdded() {
@@ -104,9 +123,7 @@ public class ownerWindowCreateWarehouseController {
     }
 
     private void insertWarehouseToDb(float size, String address, String type, String status) {
-        WarehouseType warehouseType = new WarehouseType();
-        warehouseType.setType(type);
-        warehouseTypeService.insertWarehouseType(warehouseType);
+        WarehouseType warehouseType = warehouseTypeService.getWarehouseType(type);
 
         WarehouseStatus warehouseStatus = warehouseStatusService.getWarehouseStatusByStatus(status);
         Warehouse warehouse = new Warehouse();

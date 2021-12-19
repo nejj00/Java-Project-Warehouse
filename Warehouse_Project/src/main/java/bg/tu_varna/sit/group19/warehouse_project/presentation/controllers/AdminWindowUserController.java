@@ -81,20 +81,24 @@ public class AdminWindowUserController implements EventHandler<MouseEvent> {
         if (result.orElse(noDelete) != yesDelete)
             return;
 
+        int selectedIndex = usersListView.getSelectionModel().getSelectedIndex();
+
         if(enumHolder.getAccountType() == Enums.AccountType.Owner)
         {
             ObservableList<UserListViewModel<OwnerAccount>> userListViewModels = ownerService.getAllOwners();
-            UserListViewModel<OwnerAccount> userListViewModel = userListViewModels.get(usersListView.getSelectionModel().getSelectedIndex());
+            UserListViewModel<OwnerAccount> userListViewModel = userListViewModels.get(selectedIndex);
             Owner owner = ownerService.getOwnerById(userListViewModel.getUserID());
             ownerService.deleteOwner(owner);
         }
         else if (enumHolder.getAccountType() == Enums.AccountType.Agent)
         {
             ObservableList<UserListViewModel<AgentAccount>> userListViewModels = agentService.getAllAgents();
-            UserListViewModel<AgentAccount> userListViewModel = userListViewModels.get(usersListView.getSelectionModel().getSelectedIndex());
+            UserListViewModel<AgentAccount> userListViewModel = userListViewModels.get(selectedIndex);
             Agent agent = agentService.getAgentById(userListViewModel.getUserID());
             agentService.deleteAgent(agent);
         }
+
+        usersListView.getItems().remove(selectedIndex);
     }
 
     URL pathRegister = getClass().getResource(Constants.View.REGISTER_VIEW);

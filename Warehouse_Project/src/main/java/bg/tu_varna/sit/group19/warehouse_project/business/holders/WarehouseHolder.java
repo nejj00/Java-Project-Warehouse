@@ -6,6 +6,7 @@ import bg.tu_varna.sit.group19.warehouse_project.data.entities.WarehouseType;
 
 public class WarehouseHolder {
 
+    private Long ID;
     private float size;
     private String address;
     private WarehouseType warehouseType;
@@ -18,6 +19,14 @@ public class WarehouseHolder {
 
     public static WarehouseHolder getInstance() {
         return INSTANCE;
+    }
+
+    public Long getID() {
+        return ID;
+    }
+
+    public void setID(Long ID) {
+        this.ID = ID;
     }
 
     public float getSize() {
