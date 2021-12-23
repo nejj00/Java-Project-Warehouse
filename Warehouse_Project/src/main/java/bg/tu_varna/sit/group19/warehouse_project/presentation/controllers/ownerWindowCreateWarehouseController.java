@@ -32,7 +32,7 @@ public class ownerWindowCreateWarehouseController {
     @FXML
     public TextField SizeTextField;
     @FXML
-    public TextArea addressTextArea;
+    public TextField addressTextArea;
     @FXML
     public ComboBox statusComboBox;
     @FXML

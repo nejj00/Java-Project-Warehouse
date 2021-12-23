@@ -18,7 +18,7 @@ public class Connection {
         try {
             sessionFactory = new Configuration().configure(new File(Constants.HibernateConfig.CFG_FILE)).buildSessionFactory();
         } catch (Throwable ex) {
-            log.error("Initial SessionFactory created failed" + ex);
+            log.error("Initial SessionFactory created failed " + ex);
         }
     }
 

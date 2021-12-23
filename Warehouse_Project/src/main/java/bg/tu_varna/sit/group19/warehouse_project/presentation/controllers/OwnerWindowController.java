@@ -40,10 +40,11 @@ public class OwnerWindowController implements EventHandler<MouseEvent> {
     public void setOwner(Owner owner) {
         this.owner = owner;
     }
-
     public void setUserFullName(String userFullName) {
         this.userFullName.setText(userFullName);
     }
+
+    public static int OwnerWindowButtonClicked;
 
     @FXML
     public void initialize() {
@@ -53,20 +54,24 @@ public class OwnerWindowController implements EventHandler<MouseEvent> {
         ShowAvailableWarehousesButton.setOnMouseClicked(this::ShowAvailableWarehouses);
         ShowAllWarehousesButton.setOnMouseClicked(this::ShowAllWarehouses);
         logOutButton.setOnMouseClicked(this::LogOutClicked);
+
+        OwnerWindowButtonClicked=0;
     }
 
-    private final URL warehouseListPath = getClass().getResource(Constants.View.WAREHOUSES_LIST_VIEW);
+    private final URL ListPath = getClass().getResource(Constants.View.WAREHOUSES_LIST_VIEW);
     private final WarehouseHolder warehouseHolder = WarehouseHolder.getInstance();
     @FXML
     public void ShowAllWarehouses(MouseEvent mouseEvent){
-        AnchorPane pane = null;
+        OwnerWindowButtonClicked=Constants.Owner.ShowAllWarehousesClicked;
+
+        AnchorPane pane;
         try {
-            pane = FXMLLoader.load(warehouseListPath);
+            pane = FXMLLoader.load(ListPath);
+            warehouseHolder.setOwner(owner);
+            mainAnchorPane.getChildren().setAll(pane);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        warehouseHolder.setOwner(owner);
-        mainAnchorPane.getChildren().setAll(pane);
     }
 
     @FXML
@@ -81,12 +86,30 @@ public class OwnerWindowController implements EventHandler<MouseEvent> {
 
     @FXML
     public void ShowContracts(MouseEvent mouseEvent) {
+        OwnerWindowButtonClicked=Constants.Owner.ShowContractsClicked;
 
+        AnchorPane pane;
+        try {
+            pane = FXMLLoader.load(ListPath);
+
+            mainAnchorPane.getChildren().setAll(pane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     public void ShowAvailableWarehouses(MouseEvent mouseEvent) {
+        OwnerWindowButtonClicked=Constants.Owner.ShowAvailableWarehousesClicked;
 
+        AnchorPane pane;
+        try {
+            pane = FXMLLoader.load(ListPath);
+
+            mainAnchorPane.getChildren().setAll(pane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void LogOutClicked(MouseEvent mouseEvent) {

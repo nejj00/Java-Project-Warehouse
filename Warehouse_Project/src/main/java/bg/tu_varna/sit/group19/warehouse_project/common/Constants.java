@@ -13,6 +13,8 @@ public class Constants {
         public static final String WAREHOUSES_LIST_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentations.view/ownerWindowWarehouseList.fxml";
         public static final String CREATE_WAREHOUSE_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentations.view/ownerWindowCreateWarehouse.fxml";
         public static final String WAREHOUSE_ROOMS_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentations.view/warehouseRoomsWindow.fxml";
+        public static final String CONTRACT_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentations.view/contract.fxml";
+        public static final String AGENT_LIST_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentations.view/agentWindowList.fxml";
     }
 
     public static class Configurations{
@@ -26,7 +28,18 @@ public class Constants {
     }
 
     public static class HibernateConfig{
-        public static final String CFG_FILE = "E:\\GitHub\\UNI\\Java-Project-Warehouse\\Warehouse_Project\\src\\main\\resources\\bg\\tu_varna\\sit\\group19\\warehouse_project\\configuration\\hibernate.cfg.xml";
+        public static final String CFG_FILE = "C:\\Users\\Radi_boy112\\Documents\\GitHub\\Java-Project-Warehouse\\Warehouse_Project\\src\\main\\resources\\bg\\tu_varna\\sit\\group19\\warehouse_project\\configuration\\hibernate.cfg.xml";
+    }
+
+    public static class Owner {
+        public static final int ShowContractsClicked = 1;
+        public static final int ShowAvailableWarehousesClicked = 2;
+        public static final int ShowAllWarehousesClicked = 3;
+    }
+
+    public static class Agent {
+        public static final int ShowOwnersWarehousesClicked = 1;
+        public static final int ShowAvailableWarehousesClicked = 2;
     }
 
 }

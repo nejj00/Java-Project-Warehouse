@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class AgentService {
@@ -51,5 +52,15 @@ public class AgentService {
                         agent.getAgentAccount(),
                         agent.getAgentAccount().getUsername()
                 )).collect(Collectors.toList()));
+    }
+
+    public Agent getAgentByName(String firstName,String lastName){
+        List<Agent> agents = agentRepository.getAll();
+
+        for (Agent agent:agents) {
+            if(agent.getFirstName().equals(firstName) &&agent.getLastName().equals(lastName))
+                return agent;
+        }
+        return null;
     }
 }

@@ -9,13 +9,11 @@ import bg.tu_varna.sit.group19.warehouse_project.business.utils.WarehouseWithRoo
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
 import bg.tu_varna.sit.group19.warehouse_project.common.Enums;
 import bg.tu_varna.sit.group19.warehouse_project.common.ScenePaneSwitcher;
-import bg.tu_varna.sit.group19.warehouse_project.data.entities.Owner;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Warehouse;
 import bg.tu_varna.sit.group19.warehouse_project.presentation.models.WarehouseListViewModel;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
@@ -23,10 +21,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.Optional;
+
+import static bg.tu_varna.sit.group19.warehouse_project.presentation.controllers.OwnerWindowController.OwnerWindowButtonClicked;
 
 public class OwnerWindowListController implements EventHandler<MouseEvent> {
     @FXML
@@ -42,7 +40,28 @@ public class OwnerWindowListController implements EventHandler<MouseEvent> {
 
     @FXML
     public void initialize() {
+        switch (OwnerWindowButtonClicked) {
+            case Constants.Owner.ShowContractsClicked -> LoadContracts();
+            case Constants.Owner.ShowAvailableWarehousesClicked -> LoadAvailableWarehouses();
+            case Constants.Owner.ShowAllWarehousesClicked -> LoadAllWareHouses();
+        }
+
+        CreateWarehouseContextMenu();
+    }
+
+    private void LoadContracts() {
+
+    }
+
+    private void LoadAllWareHouses() {
         warehouseListView.setItems(warehouseService.getAllWarehouses());
+    }
+
+    private void LoadAvailableWarehouses() {
+
+    }
+
+    private void CreateWarehouseContextMenu() {
         warehouseListView.setContextMenu(listContextMenu.getMyContext());
 
         listContextMenu.getMenuItemInsert().setOnAction((event)->{
