@@ -24,4 +24,8 @@ public class WarehouseStatusService {
 
         return null;
     }
+
+    public List<WarehouseStatus> getAllStatus(){
+        return warehouseStatusRepository.getAll();
+    }
 }

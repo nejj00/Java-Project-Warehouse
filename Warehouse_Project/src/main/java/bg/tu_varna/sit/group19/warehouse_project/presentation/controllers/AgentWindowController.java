@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.group19.warehouse_project.presentation.controllers;
 
+import bg.tu_varna.sit.group19.warehouse_project.business.holders.AgentHolder;
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
 import bg.tu_varna.sit.group19.warehouse_project.common.ScenePaneSwitcher;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Agent;
@@ -38,6 +39,7 @@ public class AgentWindowController implements EventHandler<MouseEvent> {
 
     private Agent agent;
     private final URL ContractPath = getClass().getResource(Constants.View.CONTRACT_VIEW);
+    private final AgentHolder agentHolder = AgentHolder.getInstance();
 
     public void setAgent(Agent agent) {
         this.agent = agent;

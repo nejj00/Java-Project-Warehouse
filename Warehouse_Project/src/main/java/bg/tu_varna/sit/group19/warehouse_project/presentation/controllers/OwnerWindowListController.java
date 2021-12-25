@@ -4,38 +4,36 @@ import bg.tu_varna.sit.group19.warehouse_project.business.holders.EnumHolder;
 import bg.tu_varna.sit.group19.warehouse_project.business.holders.WarehouseHolder;
 import bg.tu_varna.sit.group19.warehouse_project.business.services.WarehouseService;
 import bg.tu_varna.sit.group19.warehouse_project.business.services.WarehouseWithRoomsService;
+import bg.tu_varna.sit.group19.warehouse_project.business.utils.AlertMessages;
 import bg.tu_varna.sit.group19.warehouse_project.business.utils.ListContextMenu;
 import bg.tu_varna.sit.group19.warehouse_project.business.utils.WarehouseWithRooms;
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
 import bg.tu_varna.sit.group19.warehouse_project.common.Enums;
 import bg.tu_varna.sit.group19.warehouse_project.common.ScenePaneSwitcher;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Warehouse;
+import bg.tu_varna.sit.group19.warehouse_project.presentation.models.OwnerWindowModel;
 import bg.tu_varna.sit.group19.warehouse_project.presentation.models.WarehouseListViewModel;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
-import java.util.Optional;
 
 import static bg.tu_varna.sit.group19.warehouse_project.presentation.controllers.OwnerWindowController.OwnerWindowButtonClicked;
 
 public class OwnerWindowListController implements EventHandler<MouseEvent> {
     @FXML
-    public ListView warehouseListView;
+    public ListView<WarehouseListViewModel> warehouseListView;
     @FXML
     private AnchorPane mainAnchorPane;
 
     private final WarehouseService warehouseService = WarehouseService.getInstance();
     private final ListContextMenu listContextMenu = new ListContextMenu();
 
-    private EnumHolder enumHolder = EnumHolder.getInstance();
+    private final EnumHolder enumHolder = EnumHolder.getInstance();
     // private final WarehouseListViewModel model = WarehouseListViewModel();
 
     @FXML
@@ -101,22 +99,14 @@ public class OwnerWindowListController implements EventHandler<MouseEvent> {
         mainAnchorPane.getChildren().setAll(ScenePaneSwitcher.getPaneToSwitchTo(pathCreateWarehouse));
     }
 
-    private WarehouseWithRoomsService warehouseWithRoomsService = WarehouseWithRoomsService.getInstance();
+    private final OwnerWindowModel ownerWindowModel = new OwnerWindowModel();
+    private final WarehouseWithRoomsService warehouseWithRoomsService = WarehouseWithRoomsService.getInstance();
     private void menuDeleteAction() {
-        ButtonType yesDelete = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
-        ButtonType noDelete = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
-        Alert alert = new Alert(Alert.AlertType.WARNING,
-                "Are you sure you want to delete this record.", yesDelete, noDelete);
-
-        alert.setTitle("Deletion Warning");
-        Optional<ButtonType> result = alert.showAndWait();
-
-        if (result.orElse(noDelete) != yesDelete)
+        boolean forDeletion = AlertMessages.alertYesNoResult(ownerWindowModel.getAlertDeleteMessage(), ownerWindowModel.getAlertDeleteTitle());
+        if(!forDeletion)
             return;
 
-        int selectedIndex = warehouseListView.getSelectionModel().getSelectedIndex();
-        ObservableList<WarehouseListViewModel> warehouseList = warehouseService.getAllWarehouses();
-        WarehouseListViewModel warehouseListViewModel = warehouseList.get(selectedIndex);
+        WarehouseListViewModel warehouseListViewModel = warehouseListView.getSelectionModel().getSelectedItem();
         Warehouse warehouse = warehouseService.getWarehouseById(warehouseListViewModel.getWarehouseID());
 
         WarehouseWithRooms warehouseWithRooms = new WarehouseWithRooms();
@@ -125,7 +115,7 @@ public class OwnerWindowListController implements EventHandler<MouseEvent> {
 
         warehouseWithRoomsService.deleteWarehouseWithRooms(warehouseWithRooms);
 
-        warehouseListView.getItems().remove(selectedIndex);
+        warehouseListView.getItems().remove(warehouseListViewModel);
     }
 
     @Override

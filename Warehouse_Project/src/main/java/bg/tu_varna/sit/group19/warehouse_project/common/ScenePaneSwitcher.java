@@ -40,7 +40,7 @@ public class ScenePaneSwitcher {
         return pane;
     }
 
-    public static void openNewStage(URL path) {
+    public static void openNewStageAndWait(URL path) {
         Stage myStage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(path);
         Parent root = null;

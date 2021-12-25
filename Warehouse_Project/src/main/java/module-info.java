@@ -28,6 +28,6 @@ module bg.tu_varna.sit.group19.warehouse_project {
     exports bg.tu_varna.sit.group19.warehouse_project.data.entities;
     opens bg.tu_varna.sit.group19.warehouse_project.data.entities to org.hibernate.orm.core;
 
-
+    exports bg.tu_varna.sit.group19.warehouse_project.presentation.models;
 
 }

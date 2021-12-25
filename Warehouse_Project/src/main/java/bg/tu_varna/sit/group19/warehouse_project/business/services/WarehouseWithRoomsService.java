@@ -56,9 +56,9 @@ public class WarehouseWithRoomsService {
             isInList = false;
 
             warehouseRoomDB = warehouseRooms.get(i);
-            for(int j = 0; j < warehouseRooms.size(); j++)
+            for(int j = 0; j < warehouseWithRooms.getRooms().size(); j++)
             {
-                warehouseRoom = warehouseWithRooms.getRooms().get(i);
+                warehouseRoom = warehouseWithRooms.getRooms().get(j);
 
                 if(warehouseRoom.getId() == 0)
                     continue;

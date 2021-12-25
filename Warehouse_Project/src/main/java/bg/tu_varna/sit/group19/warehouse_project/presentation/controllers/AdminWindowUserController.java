@@ -3,6 +3,7 @@ package bg.tu_varna.sit.group19.warehouse_project.presentation.controllers;
 import bg.tu_varna.sit.group19.warehouse_project.business.holders.EnumHolder;
 import bg.tu_varna.sit.group19.warehouse_project.business.services.AgentService;
 import bg.tu_varna.sit.group19.warehouse_project.business.services.OwnerService;
+import bg.tu_varna.sit.group19.warehouse_project.business.utils.AlertMessages;
 import bg.tu_varna.sit.group19.warehouse_project.business.utils.ListContextMenu;
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
 import bg.tu_varna.sit.group19.warehouse_project.common.Enums;
@@ -10,14 +11,12 @@ import bg.tu_varna.sit.group19.warehouse_project.data.entities.Agent;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.AgentAccount;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Owner;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.OwnerAccount;
+import bg.tu_varna.sit.group19.warehouse_project.presentation.models.AdminWindowModel;
 import bg.tu_varna.sit.group19.warehouse_project.presentation.models.UserListViewModel;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -25,7 +24,6 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
 
 public class AdminWindowUserController implements EventHandler<MouseEvent> {
 
@@ -68,17 +66,10 @@ public class AdminWindowUserController implements EventHandler<MouseEvent> {
             menuDeleteAction();
         });
     }
-
+    private final AdminWindowModel adminWindowModel = new AdminWindowModel();
     private void menuDeleteAction() {
-        ButtonType yesDelete = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
-        ButtonType noDelete = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
-        Alert alert = new Alert(Alert.AlertType.WARNING,
-                "Are you sure you want to delete this record.", yesDelete, noDelete);
-
-        alert.setTitle("Deletion Warning");
-        Optional<ButtonType> result = alert.showAndWait();
-
-        if (result.orElse(noDelete) != yesDelete)
+        boolean forDeletion = AlertMessages.alertYesNoResult(adminWindowModel.getAlertDeleteTitle(), adminWindowModel.getAlertDeleteMessage());
+        if(!forDeletion)
             return;
 
         int selectedIndex = usersListView.getSelectionModel().getSelectedIndex();
@@ -156,9 +147,15 @@ public class AdminWindowUserController implements EventHandler<MouseEvent> {
         controller.setOpenMode(openMode);
 
         if(enumHolder.getAccountType() == Enums.AccountType.Owner)
+        {
             controller.getAgentRadioButton().setVisible(false);
+            controller.getOwnerRadioButton().setSelected(true);
+        }
         else if(enumHolder.getAccountType() == Enums.AccountType.Agent)
+        {
             controller.getOwnerRadioButton().setVisible(false);
+            controller.getAgentRadioButton().setSelected(true);
+        }
 
         controller.getRegisterPane().setPrefWidth(500);
         controller.getImagePane().setPrefWidth(0);

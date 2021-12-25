@@ -1,12 +1,12 @@
 package bg.tu_varna.sit.group19.warehouse_project.presentation.controllers;
 
-import bg.tu_varna.sit.group19.warehouse_project.business.services.AgentService;
-import bg.tu_varna.sit.group19.warehouse_project.business.services.OwnerService;
-import bg.tu_varna.sit.group19.warehouse_project.business.services.WarehouseContractService;
-import bg.tu_varna.sit.group19.warehouse_project.business.services.WarehouseRoomService;
+import bg.tu_varna.sit.group19.warehouse_project.business.holders.AgentHolder;
+import bg.tu_varna.sit.group19.warehouse_project.business.services.*;
+import bg.tu_varna.sit.group19.warehouse_project.business.utils.AlertMessages;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.*;
 import bg.tu_varna.sit.group19.warehouse_project.data.repositories.WarehouseRepository;
 import bg.tu_varna.sit.group19.warehouse_project.data.repositories.WarehouseRoomRepository;
+import bg.tu_varna.sit.group19.warehouse_project.presentation.models.ContractWindowModel;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -43,15 +43,17 @@ public class ContractController {
     @FXML
     private Label OwnerFamily;
     @FXML
-    private ComboBox WarehouseCombobox;
+    private ComboBox<Warehouse> WarehouseCombobox;
     @FXML
-    private ComboBox RoomCombobox;
+    private ComboBox<WarehouseRoom> RoomCombobox;
     @FXML
     private AnchorPane AnchorPane;
 
+    private AgentHolder agentHolder = AgentHolder.getInstance();
+
     private OwnerService ownerService;
     private AgentService agentService;
-    private WarehouseRoomService roomService;
+    private final WarehouseRoomService roomService = WarehouseRoomService.getInstance();
     private WarehouseContractService contractService;
     private WarehouseRoomRepository warehouseRoomRepository;
     private WarehouseRepository warehouseRepository;
@@ -64,6 +66,9 @@ public class ContractController {
         warehouseRoomRepository = new WarehouseRoomRepository();
         warehouseRepository = new WarehouseRepository();
 
+        AgentName.setText(agentHolder.getAgent().getFirstName());
+        AgentFamily.setText(agentHolder.getAgent().getLastName());
+
 //        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Constants.View.AGENT_VIEW));
 //        AgentWindowController controller = fxmlLoader.<AgentWindowController>getController();
 //        controller.setUserFullName(admin.getFirstName() + " " + admin.getLastName());
@@ -71,64 +76,67 @@ public class ContractController {
 
         WarehouseCombobox.getItems().addAll(warehouseRepository.getAll());
 
-        for(WarehouseRoom room:warehouseRoomRepository.getAll()){
-            RoomCombobox.getItems().add((int) room.getId(),room);
-        }
+//        for(WarehouseRoom room:warehouseRoomRepository.getAll()){
+//            RoomCombobox.getItems().add((int) room.getId(),room);
+//        }
 
         CreateButton.setOnMouseClicked(this::CreateClicked);
         CancelButton.setOnMouseClicked(this::CancelClicked);
-        WarehouseCombobox.setOnAction(this::LoadRooms);
+        WarehouseCombobox.setOnAction(this::onComboSelectionChanged);
     }
 
+    private final ContractWindowModel contractWindowModel = new ContractWindowModel();
     @FXML
     private void CreateClicked(MouseEvent mouseEvent) {
-        if(Price.getText()==null&&FromDate.getValue()==null
-                &&ToDate.getValue()==null&&RenterName.getText()==null
-                &&RenterFamily.getText()==null&&RenterPhoneNumber.getText()==null
-                &&AgentName.getText()==null&&OwnerName.getText()==null
-                && WarehouseCombobox.getSelectionModel().isEmpty()
-                && RoomCombobox.getSelectionModel().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("title");
-            alert.setHeaderText("head");
-            alert.setContentText("Please fill all fields");
-            alert.showAndWait();
+        if(Price.getText().trim().isEmpty() || FromDate.getValue()==null || ToDate.getValue()==null
+                || RenterName.getText().trim().isEmpty() || RenterFamily.getText().trim().isEmpty() || RenterPhoneNumber.getText().trim().isEmpty()
+                || WarehouseCombobox.getSelectionModel().isEmpty() || RoomCombobox.getSelectionModel().isEmpty()
+                || Price.getText().trim().isEmpty()) {
+            AlertMessages.alertWarningMessage(contractWindowModel.getAlertTitle(), contractWindowModel.getAlertEmptyFields());
         }
         else{
-            LocalDate ld = FromDate.getValue();
-            Calendar c =  Calendar.getInstance();
-            c.set(ld.getYear(), ld.getMonthValue() - 1, ld.getDayOfMonth());
-            Date date = c.getTime();
+            LocalDate localDate = FromDate.getValue();
+            Calendar calendar =  Calendar.getInstance();
+            calendar.set(localDate.getYear(), localDate.getMonthValue() - 1, localDate.getDayOfMonth());
+            Date fromDate = calendar.getTime();
 
-            ld = ToDate.getValue();
-            c.set(ld.getYear(), ld.getMonthValue() - 1, ld.getDayOfMonth());
-            Date date2 = c.getTime();
+            localDate = ToDate.getValue();
+            calendar.set(localDate.getYear(), localDate.getMonthValue() - 1, localDate.getDayOfMonth());
+            Date toDate = calendar.getTime();
 
             float price = Float.parseFloat(Price.getText());
-
             Renter renter = new Renter();
             renter.setFirstName(RenterName.getText());
             renter.setLastName(RenterFamily.getText());
             renter.setPhoneNumber(RenterPhoneNumber.getText());
 
-            Owner owner = new Owner();
-            owner = ownerService.getOwnerByName(OwnerName.getText(),OwnerFamily.getText());
+//            Owner owner = new Owner();
+//            owner = ownerService.getOwnerByName(OwnerName.getText(),OwnerFamily.getText());
 
-            long ID=0;
+            long ID = RoomCombobox.getSelectionModel().getSelectedItem().getId();
             WarehouseRoom warehouseRoom;
             warehouseRoom = roomService.getWarehouseRoomById(ID);
 
-            Agent agent;
-            agent = agentService.getAgentByName(AgentName.getText(),AgentFamily.getText());
+            Owner owner = warehouseRoom.getWarehouse().getOwner();
 
-            AddContractToDB(date,date2,price,warehouseRoom,agent,renter,owner);
+//            Agent agent;
+//            agent = agentService.getAgentByName(AgentName.getText(),AgentFamily.getText());
+
+            Agent agent = agentHolder.getAgent();
+            boolean result = AlertMessages.alertYesNoResult(contractWindowModel.getAlertConfirmQuestion(), contractWindowModel.getAlertTitle());
+            if(!result)
+                return;
+
+            AddContractToDB(fromDate,toDate,price,warehouseRoom,agent,renter,owner);
+            AnchorPane.getChildren().clear();
         }
     }
 
     @FXML
-    private void LoadRooms(Event event) {
-        Warehouse warehouse = (Warehouse) WarehouseCombobox.getSelectionModel().getSelectedItem();
-
+    private void onComboSelectionChanged(Event event) {
+        Warehouse warehouse = WarehouseCombobox.getSelectionModel().getSelectedItem();
+        OwnerName.setText(warehouse.getOwner().getFirstName());
+        OwnerFamily.setText(warehouse.getOwner().getLastName());
         RoomCombobox.getItems().addAll(warehouseRoomRepository.getAllRoomsFromWarehouseWithId(warehouse.getId()));
     }
 
@@ -136,9 +144,11 @@ public class ContractController {
     private void CancelClicked(MouseEvent mouseEvent) {
         AnchorPane.getChildren().clear();
     }
+    private final RenterService renterService = RenterService.getInstance();
 
     private void AddContractToDB(Date fromDate, Date toDate, float Price, WarehouseRoom room, Agent agent, Renter renter, Owner owner) {
-        //renter insert?
+
+        renterService.insertRenter(renter);
 
         WarehouseContract contract = new WarehouseContract();
         contract.setAgent(agent);

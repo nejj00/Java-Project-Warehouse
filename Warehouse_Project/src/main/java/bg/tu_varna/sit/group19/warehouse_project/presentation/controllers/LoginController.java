@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.group19.warehouse_project.presentation.controllers;
 
+import bg.tu_varna.sit.group19.warehouse_project.business.holders.AgentHolder;
 import bg.tu_varna.sit.group19.warehouse_project.business.services.AdminAccountService;
 import bg.tu_varna.sit.group19.warehouse_project.business.services.AgentAccountService;
 import bg.tu_varna.sit.group19.warehouse_project.business.services.LoginServices;
@@ -128,7 +129,9 @@ public class LoginController implements EventHandler<MouseEvent> {
         Stage myStage = new Stage();
 
         AgentAccountService agentAccountService = AgentAccountService.getInstance();
+        AgentHolder agentHolder = AgentHolder.getInstance();
         Agent agent = agentAccountService.getAgentByUsername(username);
+        agentHolder.setAgent(agent);
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Constants.View.AGENT_VIEW));
 

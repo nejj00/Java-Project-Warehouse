@@ -91,7 +91,6 @@ public class OwnerWindowController implements EventHandler<MouseEvent> {
         AnchorPane pane;
         try {
             pane = FXMLLoader.load(ListPath);
-
             mainAnchorPane.getChildren().setAll(pane);
         } catch (IOException e) {
             e.printStackTrace();
@@ -105,7 +104,6 @@ public class OwnerWindowController implements EventHandler<MouseEvent> {
         AnchorPane pane;
         try {
             pane = FXMLLoader.load(ListPath);
-
             mainAnchorPane.getChildren().setAll(pane);
         } catch (IOException e) {
             e.printStackTrace();

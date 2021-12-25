@@ -3,14 +3,11 @@ package bg.tu_varna.sit.group19.warehouse_project.business.holders;
 import bg.tu_varna.sit.group19.warehouse_project.common.Enums;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.ClimateCondition;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Warehouse;
+import bg.tu_varna.sit.group19.warehouse_project.data.entities.WarehouseRoom;
 
 public class WarehouseRoomHolder {
 
-    private Long ID;
-    private float size;
-    private float price;
-    private ClimateCondition climateCondition;
-    private Warehouse warehouse;
+    private WarehouseRoom warehouseRoom = new WarehouseRoom();
 
     private Enums.OpenMode warehouseRoomsOpenMode;
 
@@ -22,44 +19,12 @@ public class WarehouseRoomHolder {
         return INSTANCE;
     }
 
-    public Long getID() {
-        return ID;
+    public WarehouseRoom getWarehouseRoom() {
+        return warehouseRoom;
     }
 
-    public void setID(Long ID) {
-        this.ID = ID;
-    }
-
-    public float getSize() {
-        return size;
-    }
-
-    public void setSize(float size) {
-        this.size = size;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
-    }
-
-    public ClimateCondition getClimateCondition() {
-        return climateCondition;
-    }
-
-    public void setClimateCondition(ClimateCondition climateCondition) {
-        this.climateCondition = climateCondition;
-    }
-
-    public Warehouse getWarehouse() {
-        return warehouse;
-    }
-
-    public void setWarehouse(Warehouse warehouse) {
-        this.warehouse = warehouse;
+    public void setWarehouseRoom(WarehouseRoom warehouseRoom) {
+        this.warehouseRoom = warehouseRoom;
     }
 
     public Enums.OpenMode getWarehouseRoomsOpenMode() {

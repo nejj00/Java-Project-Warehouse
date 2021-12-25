@@ -92,12 +92,11 @@ public class Warehouse {
 
     @Override
     public String toString() {
-        return "Warehouse{" +
-                "id=" + id +
+        return "Warehouse " + id +
+                ": address= " + WarehouseAddress +
                 ", size=" + size +
-                ", owner=" + owner +
-                ", type=" + type +
-                ", status=" + status +
-                '}';
+                ", owner=" + owner.getFirstName() + " " +owner.getLastName() +
+                ", type=" + type.getType() +
+                ", status=" + status.getStatus();
     }
 }
