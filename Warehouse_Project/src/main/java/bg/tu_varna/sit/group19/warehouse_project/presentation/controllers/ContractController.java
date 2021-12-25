@@ -134,6 +134,7 @@ public class ContractController {
 
     @FXML
     private void onComboSelectionChanged(Event event) {
+        WarehouseCombobox.getItems().clear();
         Warehouse warehouse = WarehouseCombobox.getSelectionModel().getSelectedItem();
         OwnerName.setText(warehouse.getOwner().getFirstName());
         OwnerFamily.setText(warehouse.getOwner().getLastName());
