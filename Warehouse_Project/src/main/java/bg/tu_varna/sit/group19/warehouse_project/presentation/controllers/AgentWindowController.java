@@ -65,7 +65,7 @@ public class AgentWindowController implements EventHandler<MouseEvent> {
 
     @FXML
     public void ShowAvailableWarehouses(MouseEvent mouseEvent){
-        AgentWindowButtonClicked = Constants.Agent.ShowAvailableWarehousesClicked;
+        AgentWindowButtonClicked = Constants.AgentConstants.ShowAvailableWarehousesClicked;
 
         AnchorPane pane;
         try {
@@ -84,7 +84,7 @@ public class AgentWindowController implements EventHandler<MouseEvent> {
 
     @FXML
     public void ShowOwnersWarehouses(MouseEvent mouseEvent){
-        AgentWindowButtonClicked = Constants.Agent.ShowOwnersWarehousesClicked;
+        AgentWindowButtonClicked = Constants.AgentConstants.ShowOwnersWarehousesClicked;
 
         AnchorPane pane;
         try {

@@ -17,8 +17,8 @@ public class AgentWindowListController implements EventHandler<MouseEvent> {
     @FXML
     public void initialize() {
         switch (AgentWindowButtonClicked) {
-            case Constants.Agent.ShowOwnersWarehousesClicked -> ShowOwnersWarehouses();
-            case Constants.Agent.ShowAvailableWarehousesClicked -> ShowAvailableWarehousesC();
+            case Constants.AgentConstants.ShowOwnersWarehousesClicked -> ShowOwnersWarehouses();
+            case Constants.AgentConstants.ShowAvailableWarehousesClicked -> ShowAvailableWarehousesC();
         }
     }
 
