@@ -15,6 +15,13 @@ public class Constants {
         public static final String WAREHOUSE_ROOMS_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentations.view/warehouseRoomsWindow.fxml";
         public static final String CONTRACT_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentations.view/contract.fxml";
         public static final String AGENT_LIST_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentations.view/agentWindowList.fxml";
+        public static final String STATUS_LIST_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentations.view/adminStatusList.fxml";
+        public static final String STATUS_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentations.view/statusWindow.fxml";
+        public static final String CLIMATE_LIST_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentations.view/adminClimateList.fxml";
+        public static final String CLIMATE_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentations.view/climateWindow.fxml";
+        public static final String TYPE_LIST_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentations.view/adminWarehouseTypeList.fxml";
+        public static final String TYPE_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentations.view/WarehouseTypeWindow.fxml";
+
     }
 
     public static class Configurations{
@@ -28,7 +35,7 @@ public class Constants {
     }
 
     public static class HibernateConfig{
-        public static final String CFG_FILE = "\\Users\\Radi_boy112\\Documents\\GitHub\\Java-Project-Warehouse\\Warehouse_Project\\src\\main\\resources\\bg\\tu_varna\\sit\\group19\\warehouse_project\\configuration\\hibernate.cfg.xml";
+        public static final String CFG_FILE = "E:\\GitHub\\UNI\\Java-Project-Warehouse\\Warehouse_Project\\src\\main\\resources\\bg\\tu_varna\\sit\\group19\\warehouse_project\\configuration\\hibernate.cfg.xml";
     }
 
     public static class Owner {

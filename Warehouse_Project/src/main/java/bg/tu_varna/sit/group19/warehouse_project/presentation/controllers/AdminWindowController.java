@@ -42,7 +42,7 @@ public class AdminWindowController implements EventHandler<MouseEvent> {
         //userFullName.setText("Random Text " + admin.getFirstName());
     }
 
-    URL userListPath = getClass().getResource(Constants.View.ADMIN_OWNERS_LIST_VIEW);
+    private final URL userListPath = getClass().getResource(Constants.View.ADMIN_OWNERS_LIST_VIEW);
 
     public void showOwnersClicked(MouseEvent mouseEvent) throws IOException {
         enumHolder.setAccountType(Enums.AccountType.Owner);
@@ -61,6 +61,24 @@ public class AdminWindowController implements EventHandler<MouseEvent> {
         URL loginPath = getClass().getResource(Constants.View.LOGIN_VIEW);
         Stage thisStage = method.getStage(mouseEvent);
         method.ChangeScene(thisStage, loginPath);
+    }
+
+    private final URL statusListPath = getClass().getResource(Constants.View.STATUS_LIST_VIEW);
+    public void editStatusClicked(MouseEvent mouseEvent) throws IOException {
+        AnchorPane pane = FXMLLoader.load(statusListPath);
+        mainAnchorPane.getChildren().setAll(pane);
+    }
+
+    private final URL typeListPath = getClass().getResource(Constants.View.TYPE_LIST_VIEW);
+    public void editWarehouseTypeClicked(MouseEvent mouseEvent) throws IOException {
+        AnchorPane pane = FXMLLoader.load(typeListPath);
+        mainAnchorPane.getChildren().setAll(pane);
+    }
+
+    private final URL climateListPath = getClass().getResource(Constants.View.CLIMATE_LIST_VIEW);
+    public void editClimateConditionsClicked(MouseEvent mouseEvent) throws IOException {
+        AnchorPane pane = FXMLLoader.load(climateListPath);
+        mainAnchorPane.getChildren().setAll(pane);
     }
 
     @Override

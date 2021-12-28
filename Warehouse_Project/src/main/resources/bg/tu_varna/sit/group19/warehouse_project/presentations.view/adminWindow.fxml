@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.group19.warehouse_project.presentation.controllers.AdminWindowController">
    <left>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="900.0" prefWidth="400.0" BorderPane.alignment="CENTER">
          <children>
@@ -30,10 +30,25 @@
                </font>
             </Label>
             <Button layoutX="230.0" layoutY="10.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" text="Settings" />
+            <Button layoutX="5.0" layoutY="320.0" mnemonicParsing="false" onMouseClicked="#editStatusClicked" prefHeight="60.0" prefWidth="390.0" text="Edit Status">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Button>
+            <Button layoutX="5.0" layoutY="380.0" mnemonicParsing="false" onMouseClicked="#editWarehouseTypeClicked" prefHeight="60.0" prefWidth="390.0" text="Edit Warehouse Types">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Button>
+            <Button layoutX="5.0" layoutY="440.0" mnemonicParsing="false" onMouseClicked="#editClimateConditionsClicked" prefHeight="60.0" prefWidth="390.0" text="Edit Climate Conditions">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </left>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <AnchorPane fx:id="mainAnchorPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
