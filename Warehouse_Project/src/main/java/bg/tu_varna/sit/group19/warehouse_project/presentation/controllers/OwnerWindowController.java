@@ -35,7 +35,7 @@ public class OwnerWindowController implements EventHandler<MouseEvent> {
     @FXML
     public AnchorPane mainAnchorPane;
 
-    private Owner owner;
+    private static Owner owner;
 
     public void setOwner(Owner owner) {
         this.owner = owner;
@@ -115,6 +115,10 @@ public class OwnerWindowController implements EventHandler<MouseEvent> {
         URL loginPath = getClass().getResource(Constants.View.LOGIN_VIEW);
         Stage thisStage = method.getStage(mouseEvent);
         method.ChangeScene(thisStage, loginPath);
+    }
+
+    public static Owner getOwner() {
+        return owner;
     }
 
     @Override

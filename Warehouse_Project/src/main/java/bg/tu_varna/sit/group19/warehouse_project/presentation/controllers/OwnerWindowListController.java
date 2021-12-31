@@ -2,6 +2,7 @@ package bg.tu_varna.sit.group19.warehouse_project.presentation.controllers;
 
 import bg.tu_varna.sit.group19.warehouse_project.business.holders.EnumHolder;
 import bg.tu_varna.sit.group19.warehouse_project.business.holders.WarehouseHolder;
+import bg.tu_varna.sit.group19.warehouse_project.business.services.WarehouseContractService;
 import bg.tu_varna.sit.group19.warehouse_project.business.services.WarehouseService;
 import bg.tu_varna.sit.group19.warehouse_project.business.services.WarehouseWithRoomsService;
 import bg.tu_varna.sit.group19.warehouse_project.business.utils.AlertMessages;
@@ -10,7 +11,9 @@ import bg.tu_varna.sit.group19.warehouse_project.business.utils.WarehouseWithRoo
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
 import bg.tu_varna.sit.group19.warehouse_project.common.Enums;
 import bg.tu_varna.sit.group19.warehouse_project.common.ScenePaneSwitcher;
+import bg.tu_varna.sit.group19.warehouse_project.data.entities.Owner;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Warehouse;
+import bg.tu_varna.sit.group19.warehouse_project.presentation.models.ContractListViewModel;
 import bg.tu_varna.sit.group19.warehouse_project.presentation.models.OwnerWindowModel;
 import bg.tu_varna.sit.group19.warehouse_project.presentation.models.WarehouseListViewModel;
 import javafx.collections.ObservableList;
@@ -26,12 +29,16 @@ import static bg.tu_varna.sit.group19.warehouse_project.presentation.controllers
 
 public class OwnerWindowListController implements EventHandler<MouseEvent> {
     @FXML
-    public ListView<WarehouseListViewModel> warehouseListView;
+    public ListView warehouseListView;
     @FXML
     private AnchorPane mainAnchorPane;
 
     private final WarehouseService warehouseService = WarehouseService.getInstance();
     private final ListContextMenu listContextMenu = new ListContextMenu();
+    private final WarehouseContractService contractService = new WarehouseContractService();
+    private final OwnerWindowModel ownerWindowModel = new OwnerWindowModel();
+    private final WarehouseWithRoomsService warehouseWithRoomsService = WarehouseWithRoomsService.getInstance();
+
 
     private final EnumHolder enumHolder = EnumHolder.getInstance();
     // private final WarehouseListViewModel model = WarehouseListViewModel();
@@ -43,20 +50,21 @@ public class OwnerWindowListController implements EventHandler<MouseEvent> {
             case Constants.Owner.ShowAvailableWarehousesClicked -> LoadAvailableWarehouses();
             case Constants.Owner.ShowAllWarehousesClicked -> LoadAllWareHouses();
         }
-
-        CreateWarehouseContextMenu();
     }
 
     private void LoadContracts() {
-
+        Owner owner = OwnerWindowController.getOwner();
+        warehouseListView.setItems(contractService.getOwnersContracts(owner.getFirstName()+" "+owner.getLastName()));
     }
 
     private void LoadAllWareHouses() {
+        CreateWarehouseContextMenu();
         warehouseListView.setItems(warehouseService.getAllWarehouses());
     }
 
     private void LoadAvailableWarehouses() {
-
+        CreateWarehouseContextMenu();
+        warehouseListView.setItems(warehouseService.getAvailableWarehouses());
     }
 
     private void CreateWarehouseContextMenu() {
@@ -99,14 +107,12 @@ public class OwnerWindowListController implements EventHandler<MouseEvent> {
         mainAnchorPane.getChildren().setAll(ScenePaneSwitcher.getPaneToSwitchTo(pathCreateWarehouse));
     }
 
-    private final OwnerWindowModel ownerWindowModel = new OwnerWindowModel();
-    private final WarehouseWithRoomsService warehouseWithRoomsService = WarehouseWithRoomsService.getInstance();
     private void menuDeleteAction() {
         boolean forDeletion = AlertMessages.alertYesNoResult(ownerWindowModel.getAlertDeleteMessage(), ownerWindowModel.getAlertDeleteTitle());
         if(!forDeletion)
             return;
 
-        WarehouseListViewModel warehouseListViewModel = warehouseListView.getSelectionModel().getSelectedItem();
+        WarehouseListViewModel warehouseListViewModel = (WarehouseListViewModel) warehouseListView.getSelectionModel().getSelectedItem();
         Warehouse warehouse = warehouseService.getWarehouseById(warehouseListViewModel.getWarehouseID());
 
         WarehouseWithRooms warehouseWithRooms = new WarehouseWithRooms();

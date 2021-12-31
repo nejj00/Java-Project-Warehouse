@@ -3,12 +3,14 @@ package bg.tu_varna.sit.group19.warehouse_project.business.services;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Owner;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.OwnerAccount;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Warehouse;
+import bg.tu_varna.sit.group19.warehouse_project.data.entities.WarehouseStatus;
 import bg.tu_varna.sit.group19.warehouse_project.data.repositories.*;
 import bg.tu_varna.sit.group19.warehouse_project.presentation.models.UserListViewModel;
 import bg.tu_varna.sit.group19.warehouse_project.presentation.models.WarehouseListViewModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,5 +61,24 @@ public class WarehouseService {
 
     public List<Warehouse> getWarehousesList(){
         return warehouseRepository.getAll();
+    }
+
+    public ObservableList<WarehouseListViewModel> getAvailableWarehouses() {
+        List<WarehouseStatus> statuses = warehouseStatusRepository.getAll();
+        WarehouseStatus status = null;
+        for (WarehouseStatus s: statuses) {
+            if(s.getStatus().equals("Free"))
+                status = s;
+        }
+
+        return FXCollections.observableList(
+                status.getWarehouses().stream().map(warehouse -> new WarehouseListViewModel(
+                        warehouse.getId(),
+                        warehouse.getSize(),
+                        warehouse.getWarehouseAddress(),
+                        warehouse.getOwner(),
+                        warehouse.getType(),
+                        warehouse.getStatus()
+                )).collect(Collectors.toList()));
     }
 }

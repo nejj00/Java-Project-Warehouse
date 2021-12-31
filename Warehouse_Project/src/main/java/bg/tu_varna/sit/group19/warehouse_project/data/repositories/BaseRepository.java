@@ -122,7 +122,7 @@ public class BaseRepository<T> implements DAORepository<T>{
         return admins;
     }
 
-    private void showErrorBox(String errorString) {
+    void showErrorBox(String errorString) {
         Alert alert = new Alert(Alert.AlertType.ERROR, errorString);
         alert.showAndWait();
     }
