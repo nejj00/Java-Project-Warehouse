@@ -1,6 +1,7 @@
 package bg.tu_varna.sit.group19.warehouse_project.data.entities;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -49,4 +50,13 @@ public class WarehouseType {
                 ", type='" + type + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WarehouseType that = (WarehouseType) o;
+        return id == that.id && type.equals(that.type);
+    }
+
 }

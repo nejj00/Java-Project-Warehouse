@@ -3,6 +3,7 @@ package bg.tu_varna.sit.group19.warehouse_project.data.entities;
 import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -89,4 +90,13 @@ public class WarehouseRoom {
                 ", warehouse=" + warehouse +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WarehouseRoom that = (WarehouseRoom) o;
+        return id == that.id && Float.compare(that.size, size) == 0 && Float.compare(that.price, price) == 0 && condition.equals(that.condition) && warehouse.equals(that.warehouse);
+    }
+
 }

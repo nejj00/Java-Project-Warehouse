@@ -2,6 +2,7 @@ package bg.tu_varna.sit.group19.warehouse_project.data.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -49,5 +50,13 @@ public class ClimateCondition implements Serializable {
                 "id=" + id +
                 ", conditions='" + conditions + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ClimateCondition that = (ClimateCondition) o;
+        return id == that.id && conditions.equals(that.conditions);
     }
 }

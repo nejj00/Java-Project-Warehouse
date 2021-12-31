@@ -2,6 +2,7 @@ package bg.tu_varna.sit.group19.warehouse_project.data.entities;
 
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -83,5 +84,13 @@ public class Agent {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Agent agent = (Agent) o;
+        return id == agent.id && firstName.equals(agent.firstName) && lastName.equals(agent.lastName) && agentAccount.equals(agent.agentAccount);
     }
 }

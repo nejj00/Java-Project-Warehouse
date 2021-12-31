@@ -2,6 +2,7 @@ package bg.tu_varna.sit.group19.warehouse_project.data.entities;
 
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -99,4 +100,18 @@ public class Warehouse {
                 ", type=" + type.getType() +
                 ", status=" + status.getStatus();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        Warehouse warehouse = (Warehouse) o;
+        return id == warehouse.id && Float.compare(warehouse.size, size) == 0 && WarehouseAddress.equals(warehouse.WarehouseAddress) && owner.equals(warehouse.owner) && type.equals(warehouse.type) && status.equals(warehouse.status) /*&& warehouseRooms.equals(warehouse.warehouseRooms)*/;
+    }
+
+
 }

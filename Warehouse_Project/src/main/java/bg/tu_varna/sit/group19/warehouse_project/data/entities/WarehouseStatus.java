@@ -1,6 +1,7 @@
 package bg.tu_varna.sit.group19.warehouse_project.data.entities;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -49,4 +50,13 @@ public class WarehouseStatus {
                 ", status='" + status + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WarehouseStatus that = (WarehouseStatus) o;
+        return id == that.id && status.equals(that.status);
+    }
+
 }

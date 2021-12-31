@@ -2,6 +2,7 @@ package bg.tu_varna.sit.group19.warehouse_project.data.entities;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Warehouse_Contracts", schema = "dbo", catalog = "JavaWarehouse")
@@ -114,4 +115,13 @@ public class WarehouseContract {
                 ", owner=" + owner +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WarehouseContract that = (WarehouseContract) o;
+        return id == that.id && Float.compare(that.price, price) == 0 && fromDate.equals(that.fromDate) && toDate.equals(that.toDate) && warehouseRoom.equals(that.warehouseRoom) && agent.equals(that.agent) && renter.equals(that.renter) && owner.equals(that.owner);
+    }
+
 }

@@ -10,6 +10,8 @@ import bg.tu_varna.sit.group19.warehouse_project.presentation.models.WarehouseLi
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -73,6 +75,45 @@ public class WarehouseService {
 
         return FXCollections.observableList(
                 status.getWarehouses().stream().map(warehouse -> new WarehouseListViewModel(
+                        warehouse.getId(),
+                        warehouse.getSize(),
+                        warehouse.getWarehouseAddress(),
+                        warehouse.getOwner(),
+                        warehouse.getType(),
+                        warehouse.getStatus()
+                )).collect(Collectors.toList()));
+    }
+
+    public ObservableList<WarehouseListViewModel> getWarehousesForOwner(Owner owner){
+        List<Warehouse> warehouses = new ArrayList<Warehouse>(owner.getWarehouses());
+
+        return FXCollections.observableList(
+                warehouses.stream().map(warehouse -> new WarehouseListViewModel(
+                        warehouse.getId(),
+                        warehouse.getSize(),
+                        warehouse.getWarehouseAddress(),
+                        warehouse.getOwner(),
+                        warehouse.getType(),
+                        warehouse.getStatus()
+                )).collect(Collectors.toList()));
+    }
+
+    public ObservableList<WarehouseListViewModel> getAvailableWarehousesForOwner(Owner owner){
+        List<WarehouseStatus> statuses = warehouseStatusRepository.getAll();
+        WarehouseStatus status = null;
+        for (WarehouseStatus s: statuses) {
+            if(s.getStatus().equals("Free"))
+                status = s;
+        }
+
+        List<Warehouse> warehouses = new ArrayList<Warehouse>(owner.getWarehouses());
+        assert status != null;
+        List<Warehouse> freeWarehouses = new ArrayList<Warehouse>(status.getWarehouses());
+        warehouses.retainAll(freeWarehouses);
+        
+
+        return FXCollections.observableList(
+                warehouses.stream().map(warehouse -> new WarehouseListViewModel(
                         warehouse.getId(),
                         warehouse.getSize(),
                         warehouse.getWarehouseAddress(),

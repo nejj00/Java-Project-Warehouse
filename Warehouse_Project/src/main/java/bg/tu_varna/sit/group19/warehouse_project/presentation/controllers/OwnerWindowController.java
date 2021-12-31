@@ -100,7 +100,7 @@ public class OwnerWindowController implements EventHandler<MouseEvent> {
     @FXML
     public void ShowAvailableWarehouses(MouseEvent mouseEvent) {
         OwnerWindowButtonClicked=Constants.Owner.ShowAvailableWarehousesClicked;
-
+        warehouseHolder.setOwner(owner);
         AnchorPane pane;
         try {
             pane = FXMLLoader.load(ListPath);

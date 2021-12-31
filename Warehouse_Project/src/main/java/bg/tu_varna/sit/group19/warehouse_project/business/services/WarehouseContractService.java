@@ -51,13 +51,13 @@ public class WarehouseContractService {
                 )).collect(Collectors.toList()));
     }
 
-    public ObservableList<ContractListViewModel> getOwnersContracts(String ownerName) {
-        List<Owner> owners = ownerRepository.getAll();
-        Owner owner = null;
-        for(Owner o: owners) {
-            if((o.getFirstName()+" "+o.getLastName()).equals(ownerName))
-                owner = o;
-        }
+    public ObservableList<ContractListViewModel> getOwnersContracts(Owner owner) {
+//        List<Owner> owners = ownerRepository.getAll();
+//        Owner owner = null;
+//        for(Owner o: owners) {
+//            if((o.getFirstName()+" "+o.getLastName()).equals(ownerName))
+//                owner = o;
+//        }
 
         return FXCollections.observableList(
                 owner.getContracts().stream().map(contract -> new ContractListViewModel(

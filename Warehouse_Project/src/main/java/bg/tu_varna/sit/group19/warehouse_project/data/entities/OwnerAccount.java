@@ -1,6 +1,7 @@
 package bg.tu_varna.sit.group19.warehouse_project.data.entities;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Owner_Accounts", schema = "dbo", catalog = "JavaWarehouse")
@@ -62,4 +63,13 @@ public class OwnerAccount {
                 ", owner=" + owner +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OwnerAccount that = (OwnerAccount) o;
+        return id == that.id && username.equals(that.username) && password.equals(that.password);
+    }
+
 }

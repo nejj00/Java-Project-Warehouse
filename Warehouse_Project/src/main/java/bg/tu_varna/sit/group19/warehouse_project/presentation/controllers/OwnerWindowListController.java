@@ -54,17 +54,17 @@ public class OwnerWindowListController implements EventHandler<MouseEvent> {
 
     private void LoadContracts() {
         Owner owner = OwnerWindowController.getOwner();
-        warehouseListView.setItems(contractService.getOwnersContracts(owner.getFirstName()+" "+owner.getLastName()));
+        warehouseListView.setItems(contractService.getOwnersContracts(owner));
     }
 
     private void LoadAllWareHouses() {
         CreateWarehouseContextMenu();
-        warehouseListView.setItems(warehouseService.getAllWarehouses());
+        warehouseListView.setItems(warehouseService.getWarehousesForOwner(warehouseHolder.getOwner()));
     }
 
     private void LoadAvailableWarehouses() {
         CreateWarehouseContextMenu();
-        warehouseListView.setItems(warehouseService.getAvailableWarehouses());
+        warehouseListView.setItems(warehouseService.getAvailableWarehousesForOwner(warehouseHolder.getOwner()));
     }
 
     private void CreateWarehouseContextMenu() {

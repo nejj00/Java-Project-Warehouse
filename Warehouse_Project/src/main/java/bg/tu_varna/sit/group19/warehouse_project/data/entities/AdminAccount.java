@@ -2,6 +2,7 @@ package bg.tu_varna.sit.group19.warehouse_project.data.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Admin_Accounts", schema = "dbo", catalog = "JavaWarehouse")
@@ -62,5 +63,13 @@ public class AdminAccount implements Serializable{
                 ", password='" + password + '\'' +
                 ", admin=" + admin +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AdminAccount that = (AdminAccount) o;
+        return id == that.id && username.equals(that.username) && password.equals(that.password);
     }
 }
