@@ -1,7 +1,10 @@
 package bg.tu_varna.sit.group19.warehouse_project.presentation.controllers;
 
+import bg.tu_varna.sit.group19.warehouse_project.business.holders.OwnerHolder;
+import bg.tu_varna.sit.group19.warehouse_project.business.holders.UserHolder;
 import bg.tu_varna.sit.group19.warehouse_project.business.holders.WarehouseHolder;
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
+import bg.tu_varna.sit.group19.warehouse_project.common.Enums;
 import bg.tu_varna.sit.group19.warehouse_project.common.ScenePaneSwitcher;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Owner;
 import javafx.event.EventHandler;
@@ -35,7 +38,7 @@ public class OwnerWindowController implements EventHandler<MouseEvent> {
     @FXML
     public AnchorPane mainAnchorPane;
 
-    private static Owner owner;
+    private Owner owner;
 
     public void setOwner(Owner owner) {
         this.owner = owner;
@@ -63,20 +66,25 @@ public class OwnerWindowController implements EventHandler<MouseEvent> {
     @FXML
     public void ShowAllWarehouses(MouseEvent mouseEvent){
         OwnerWindowButtonClicked=Constants.Owner.ShowAllWarehousesClicked;
-
+        warehouseHolder.setOwner(owner);
         AnchorPane pane;
         try {
             pane = FXMLLoader.load(ListPath);
-            warehouseHolder.setOwner(owner);
             mainAnchorPane.getChildren().setAll(pane);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    private final UserHolder userHolder = UserHolder.getInstance();
     @FXML
     public void Settings(MouseEvent mouseEvent) {
+        URL pathSettings = getClass().getResource(Constants.View.SETTINGS_VIEW);
+        userHolder.setAccountType(Enums.AccountType.Owner);
+        userHolder.setOwner(owner);
 
+        AnchorPane pane = ScenePaneSwitcher.getPaneToSwitchTo(pathSettings);
+        mainAnchorPane.getChildren().setAll(pane);
     }
 
     @FXML
@@ -84,10 +92,11 @@ public class OwnerWindowController implements EventHandler<MouseEvent> {
 
     }
 
+    private final OwnerHolder ownerHolder = OwnerHolder.getInstance();
     @FXML
     public void ShowContracts(MouseEvent mouseEvent) {
         OwnerWindowButtonClicked=Constants.Owner.ShowContractsClicked;
-
+        ownerHolder.setOwner(owner);
         AnchorPane pane;
         try {
             pane = FXMLLoader.load(ListPath);
@@ -117,7 +126,7 @@ public class OwnerWindowController implements EventHandler<MouseEvent> {
         method.ChangeScene(thisStage, loginPath);
     }
 
-    public static Owner getOwner() {
+    public Owner getOwner() {
         return owner;
     }
 

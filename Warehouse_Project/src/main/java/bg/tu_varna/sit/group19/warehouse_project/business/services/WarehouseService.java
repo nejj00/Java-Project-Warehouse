@@ -69,7 +69,7 @@ public class WarehouseService {
         List<WarehouseStatus> statuses = warehouseStatusRepository.getAll();
         WarehouseStatus status = null;
         for (WarehouseStatus s: statuses) {
-            if(s.getStatus().equals("Free"))
+            if(s.getStatus().equals("free"))
                 status = s;
         }
 
@@ -102,7 +102,7 @@ public class WarehouseService {
         List<WarehouseStatus> statuses = warehouseStatusRepository.getAll();
         WarehouseStatus status = null;
         for (WarehouseStatus s: statuses) {
-            if(s.getStatus().equals("Free"))
+            if(s.getStatus().equals("free"))
                 status = s;
         }
 

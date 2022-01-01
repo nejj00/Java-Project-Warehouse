@@ -1,9 +1,7 @@
 package bg.tu_varna.sit.group19.warehouse_project.business.utils;
 
 import bg.tu_varna.sit.group19.warehouse_project.common.Enums;
-import bg.tu_varna.sit.group19.warehouse_project.data.entities.AdminAccount;
-import bg.tu_varna.sit.group19.warehouse_project.data.entities.AgentAccount;
-import bg.tu_varna.sit.group19.warehouse_project.data.entities.OwnerAccount;
+import bg.tu_varna.sit.group19.warehouse_project.data.entities.*;
 import bg.tu_varna.sit.group19.warehouse_project.data.repositories.AdminAccountRepository;
 import bg.tu_varna.sit.group19.warehouse_project.data.repositories.AgentAccountRepository;
 import bg.tu_varna.sit.group19.warehouse_project.data.repositories.OwnerAccountRepository;
@@ -65,4 +63,34 @@ public class AccountChecker {
         return false;
     }
 
+    public boolean checkPasswordSettings(Object user, String username, String password, Enums.AccountType accountType){
+        switch (accountType)
+        {
+            case Admin:
+                Admin admin = (Admin) user;
+                for (AdminAccount adminAccount : adminAccounts) {
+                    if(admin.getAdminAccount().equals(adminAccount)) {
+                        return true;
+                    }
+                }
+                break;
+            case Owner:
+                Owner owner = (Owner) user;
+                for (OwnerAccount ownerAccount : ownerAccounts) {
+                    if(owner.getOwnerAccount().equals(ownerAccount)) {
+                        return true;
+                    }
+                }
+                break;
+            case Agent:
+                Agent agent = (Agent) user;
+                for (AgentAccount agentAccount : agentAccounts) {
+                    if(agent.getAgentAccount().equals(agentAccount)) {
+                        return true;
+                    }
+                }
+                break;
+        }
+        return false;
+    }
 }

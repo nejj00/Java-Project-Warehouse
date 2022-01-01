@@ -1,6 +1,7 @@
 package bg.tu_varna.sit.group19.warehouse_project.presentation.controllers;
 
 import bg.tu_varna.sit.group19.warehouse_project.business.holders.EnumHolder;
+import bg.tu_varna.sit.group19.warehouse_project.business.holders.OwnerHolder;
 import bg.tu_varna.sit.group19.warehouse_project.business.holders.WarehouseHolder;
 import bg.tu_varna.sit.group19.warehouse_project.business.services.WarehouseContractService;
 import bg.tu_varna.sit.group19.warehouse_project.business.services.WarehouseService;
@@ -52,8 +53,9 @@ public class OwnerWindowListController implements EventHandler<MouseEvent> {
         }
     }
 
+    private final OwnerHolder ownerHolder = OwnerHolder.getInstance();
     private void LoadContracts() {
-        Owner owner = OwnerWindowController.getOwner();
+        Owner owner = ownerHolder.getOwner();
         warehouseListView.setItems(contractService.getOwnersContracts(owner));
     }
 
