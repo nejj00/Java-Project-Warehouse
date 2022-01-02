@@ -35,7 +35,7 @@ public class Constants {
     }
 
     public static class HibernateConfig{
-        public static final String CFG_FILE = "E:\\Projects\\UNI\\semester V\\Java_Project\\Project_Files\\Warehouse_Project\\src\\main\\resources\\bg\\tu_varna\\sit\\group19\\warehouse_project\\configuration\\hibernate.cfg.xml";
+        public static final String CFG_FILE = "C:\\Users\\Radi_boy112\\Documents\\GitHub\\Java-Project-Warehouse\\Warehouse_Project\\src\\main\\resources\\bg\\tu_varna\\sit\\group19\\warehouse_project\\configuration\\hibernate.cfg.xml";
     }
 
     public static class Owner {
@@ -47,6 +47,7 @@ public class Constants {
     public static class AgentConstants {
         public static final int ShowOwnersWarehousesClicked = 1;
         public static final int ShowAvailableWarehousesClicked = 2;
+        public static final int ShowRenterHistoryClicked = 3;
     }
 
 }

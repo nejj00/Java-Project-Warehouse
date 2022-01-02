@@ -26,8 +26,6 @@ public class OwnerWindowController implements EventHandler<MouseEvent> {
     @FXML
     public Button SettingsButton;
     @FXML
-    public Button AddRoomButton;
-    @FXML
     public Button ShowContractsButton;
     @FXML
     public Button ShowAvailableWarehousesButton;
@@ -52,7 +50,6 @@ public class OwnerWindowController implements EventHandler<MouseEvent> {
     @FXML
     public void initialize() {
         SettingsButton.setOnMouseClicked(this::Settings);
-        AddRoomButton.setOnMouseClicked(this::AddRoom);
         ShowContractsButton.setOnMouseClicked(this::ShowContracts);
         ShowAvailableWarehousesButton.setOnMouseClicked(this::ShowAvailableWarehouses);
         ShowAllWarehousesButton.setOnMouseClicked(this::ShowAllWarehouses);
@@ -85,11 +82,6 @@ public class OwnerWindowController implements EventHandler<MouseEvent> {
 
         AnchorPane pane = ScenePaneSwitcher.getPaneToSwitchTo(pathSettings);
         mainAnchorPane.getChildren().setAll(pane);
-    }
-
-    @FXML
-    public void AddRoom(MouseEvent mouseEvent) {
-
     }
 
     private final OwnerHolder ownerHolder = OwnerHolder.getInstance();
