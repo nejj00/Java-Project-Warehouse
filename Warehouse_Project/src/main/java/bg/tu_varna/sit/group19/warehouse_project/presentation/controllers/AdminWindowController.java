@@ -1,6 +1,7 @@
 package bg.tu_varna.sit.group19.warehouse_project.presentation.controllers;
 
 import bg.tu_varna.sit.group19.warehouse_project.business.holders.EnumHolder;
+import bg.tu_varna.sit.group19.warehouse_project.business.holders.UserHolder;
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
 import bg.tu_varna.sit.group19.warehouse_project.common.Enums;
 import bg.tu_varna.sit.group19.warehouse_project.common.ScenePaneSwitcher;
@@ -40,6 +41,16 @@ public class AdminWindowController implements EventHandler<MouseEvent> {
     @FXML
     public void initialize() {
         //userFullName.setText("Random Text " + admin.getFirstName());
+    }
+
+    private final UserHolder userHolder = UserHolder.getInstance();
+    public void settingsClicked(MouseEvent mouseEvent){
+        URL pathSettings = getClass().getResource(Constants.View.SETTINGS_VIEW);
+        userHolder.setAccountType(Enums.AccountType.Admin);
+        userHolder.setAdmin(admin);
+
+        AnchorPane pane = ScenePaneSwitcher.getPaneToSwitchTo(pathSettings);
+        mainAnchorPane.getChildren().setAll(pane);
     }
 
     private final URL userListPath = getClass().getResource(Constants.View.ADMIN_OWNERS_LIST_VIEW);
