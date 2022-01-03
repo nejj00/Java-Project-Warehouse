@@ -63,7 +63,7 @@ public class LoginController implements EventHandler<MouseEvent> {
     }
 
     @FXML
-    public void LoginClicked(MouseEvent mouseEvent) {
+    public boolean LoginClicked(MouseEvent mouseEvent) {
         //check if account exists
         //if not exists - wrong message
         //else
@@ -77,7 +77,7 @@ public class LoginController implements EventHandler<MouseEvent> {
             LoginLabel.setText(model.getWrongMessage());
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Account DOES NOT exists or password is INCORRECT");
             alert.showAndWait();
-            return;
+            return false;
         }
 
         Stage thisStage = method.getStage(mouseEvent);
@@ -95,6 +95,7 @@ public class LoginController implements EventHandler<MouseEvent> {
         if(accountType.getAccountType() == AccountTypeEnum.AccountType.Admin)
             openAdminWindow(username);
          */
+        return true;
     }
 
     private void openAdminWindow(String username) {
