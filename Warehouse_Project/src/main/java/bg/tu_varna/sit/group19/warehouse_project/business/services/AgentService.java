@@ -24,16 +24,16 @@ public class AgentService {
         public static final AgentService INSTANCE = new AgentService();
     }
 
-    public void insertAgent(Agent agent){
-        agentRepository.save(agent);
+    public boolean insertAgent(Agent agent){
+        return agentRepository.save(agent);
     }
 
-    public void updateAgent(Agent agent){
-        agentRepository.update(agent);
+    public boolean updateAgent(Agent agent){
+        return agentRepository.update(agent);
     }
 
-    public void deleteAgent(Agent agent){
-        agentAccountRepository.delete(agent.getAgentAccount());
+    public boolean deleteAgent(Agent agent){
+        return agentAccountRepository.delete(agent.getAgentAccount());
         //agentRepository.delete(agent);
     }
 
@@ -58,7 +58,7 @@ public class AgentService {
         List<Agent> agents = agentRepository.getAll();
 
         for (Agent agent:agents) {
-            if(agent.getFirstName().equals(firstName) &&agent.getLastName().equals(lastName))
+            if(agent.getFirstName().equals(firstName) && agent.getLastName().equals(lastName))
                 return agent;
         }
         return null;

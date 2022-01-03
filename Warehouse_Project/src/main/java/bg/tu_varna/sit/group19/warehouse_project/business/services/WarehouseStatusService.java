@@ -21,16 +21,16 @@ public class WarehouseStatusService {
         public static final WarehouseStatusService INSTANCE = new WarehouseStatusService();
     }
 
-    public void insertWarehouseStatus(WarehouseStatus warehouseStatus){
-        warehouseStatusRepository.save(warehouseStatus);
+    public boolean insertWarehouseStatus(WarehouseStatus warehouseStatus){
+        return warehouseStatusRepository.save(warehouseStatus);
     }
 
-    public void updateWarehouseStatus(WarehouseStatus warehouseStatus){
-        warehouseStatusRepository.update(warehouseStatus);
+    public boolean updateWarehouseStatus(WarehouseStatus warehouseStatus){
+        return warehouseStatusRepository.update(warehouseStatus);
     }
 
-    public void deleteWarehouseStatus(WarehouseStatus warehouseStatus){
-        warehouseStatusRepository.delete(warehouseStatus);
+    public boolean deleteWarehouseStatus(WarehouseStatus warehouseStatus){
+        return warehouseStatusRepository.delete(warehouseStatus);
     }
 
 

@@ -82,13 +82,10 @@ public class WarehouseRoom {
 
     @Override
     public String toString() {
-        return "WarehouseRoom{" +
-                "id=" + id +
+        return "WarehouseRoom " + id +
                 ", size=" + size +
                 ", price=" + price +
-                ", condition=" + condition +
-                ", warehouse=" + warehouse +
-                '}';
+                ", condition=" + condition.getConditions();
     }
 
     @Override

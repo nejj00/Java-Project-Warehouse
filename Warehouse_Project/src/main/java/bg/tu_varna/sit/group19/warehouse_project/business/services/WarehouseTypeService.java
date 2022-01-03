@@ -21,16 +21,16 @@ public class WarehouseTypeService {
         public static final WarehouseTypeService INSTANCE =new WarehouseTypeService();
     }
 
-    public void insertWarehouseType(WarehouseType warehouseType){
-        warehouseTypeRepository.save(warehouseType);
+    public boolean insertWarehouseType(WarehouseType warehouseType){
+        return warehouseTypeRepository.save(warehouseType);
     }
 
-    public void updateWarehouseType(WarehouseType warehouseType){
-        warehouseTypeRepository.update(warehouseType);
+    public boolean updateWarehouseType(WarehouseType warehouseType){
+        return warehouseTypeRepository.update(warehouseType);
     }
 
-    public void deleteWarehouseType(WarehouseType warehouseType){
-        warehouseTypeRepository.delete(warehouseType);
+    public boolean deleteWarehouseType(WarehouseType warehouseType){
+        return warehouseTypeRepository.delete(warehouseType);
     }
 
 

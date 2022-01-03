@@ -25,16 +25,16 @@ public class ClimateService {
         public static final ClimateService INSTANCE = new ClimateService();
     }
 
-    public void insertClimate(ClimateCondition climateCondition){
-        climateRepository.save(climateCondition);
+    public boolean insertClimate(ClimateCondition climateCondition){
+        return climateRepository.save(climateCondition);
     }
 
-    public void updateClimate(ClimateCondition climateCondition){
-        climateRepository.update(climateCondition);
+    public boolean updateClimate(ClimateCondition climateCondition){
+        return climateRepository.update(climateCondition);
     }
 
-    public void deleteClimate(ClimateCondition climateCondition) {
-        climateRepository.delete(climateCondition);
+    public boolean deleteClimate(ClimateCondition climateCondition) {
+        return climateRepository.delete(climateCondition);
     }
 
     public ClimateCondition getClimateCondition(String condition) {

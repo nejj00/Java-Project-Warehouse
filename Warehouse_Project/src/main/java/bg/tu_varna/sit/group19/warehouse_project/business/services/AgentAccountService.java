@@ -16,16 +16,16 @@ public class AgentAccountService {
         public static final AgentAccountService INSTANCE = new AgentAccountService();
     }
 
-    public void insertAgentAccount(AgentAccount agentAccount){
-        agentAccountRepository.save(agentAccount);
+    public boolean insertAgentAccount(AgentAccount agentAccount){
+        return agentAccountRepository.save(agentAccount);
     }
 
-    public void updateAgentAccount(AgentAccount agentAccount){
-        agentAccountRepository.update(agentAccount);
+    public boolean updateAgentAccount(AgentAccount agentAccount){
+        return agentAccountRepository.update(agentAccount);
     }
 
-    public void deleteAgentAccount(AgentAccount agentAccount){
-        agentAccountRepository.delete(agentAccount);
+    public boolean deleteAgentAccount(AgentAccount agentAccount){
+        return agentAccountRepository.delete(agentAccount);
     }
 
     public AgentAccount getAgentAccountById(Long id){

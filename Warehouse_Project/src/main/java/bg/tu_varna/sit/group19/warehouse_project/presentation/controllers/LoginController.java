@@ -3,7 +3,6 @@ package bg.tu_varna.sit.group19.warehouse_project.presentation.controllers;
 import bg.tu_varna.sit.group19.warehouse_project.business.holders.AgentHolder;
 import bg.tu_varna.sit.group19.warehouse_project.business.services.AdminAccountService;
 import bg.tu_varna.sit.group19.warehouse_project.business.services.AgentAccountService;
-import bg.tu_varna.sit.group19.warehouse_project.business.services.LoginServices;
 import bg.tu_varna.sit.group19.warehouse_project.business.services.OwnerAccountService;
 import bg.tu_varna.sit.group19.warehouse_project.business.utils.AccountChecker;
 import bg.tu_varna.sit.group19.warehouse_project.common.Enums;
@@ -40,7 +39,6 @@ public class LoginController implements EventHandler<MouseEvent> {
     private Label LoginLabel;
 
     private final LoginModel model;
-    private final LoginServices services;
     private final ScenePaneSwitcher method;
     public static Enums accountType = new Enums();
     public static Admin admin;
@@ -55,7 +53,6 @@ public class LoginController implements EventHandler<MouseEvent> {
     public LoginController() {
         this.method = new ScenePaneSwitcher();
         this.model = new LoginModel();
-        this.services = new LoginServices();
     }
 
     @FXML

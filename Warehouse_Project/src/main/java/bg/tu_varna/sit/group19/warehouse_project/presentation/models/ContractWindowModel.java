@@ -5,6 +5,7 @@ public class ContractWindowModel {
     private final String alertEmptyFields;
     private final String alertDoubleCheckHeader;
     private final String alertConfirmQuestion;
+    private final String alertWarehouseNotFree;
 
     public ContractWindowModel(){
         this.alertTitle = "Contract";
@@ -12,6 +13,7 @@ public class ContractWindowModel {
         this.alertDoubleCheckHeader = "Double Check";
         this.alertConfirmQuestion = "Are you sure you want to make this contract?\n" +
                 "Please double check you data before proceeding.";
+        this.alertWarehouseNotFree = "Warehouse is already taken. Please choose another one.";
     }
 
     public String getAlertTitle() {
@@ -28,5 +30,9 @@ public class ContractWindowModel {
 
     public String getAlertConfirmQuestion() {
         return alertConfirmQuestion;
+    }
+
+    public String getAlertWarehouseNotFree() {
+        return alertWarehouseNotFree;
     }
 }

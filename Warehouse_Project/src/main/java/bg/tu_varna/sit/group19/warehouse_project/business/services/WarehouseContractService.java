@@ -28,14 +28,14 @@ public class WarehouseContractService {
         public static final WarehouseContractService INSTANCE = new WarehouseContractService();
     }
 
-    public void insertContract(WarehouseContract contract) {
-        contractRepository.save(contract);
+    public boolean insertContract(WarehouseContract contract) {
+        return contractRepository.save(contract);
     }
-    public void updateContract(WarehouseContract contract) {
-        contractRepository.update(contract);
+    public boolean updateContract(WarehouseContract contract) {
+        return contractRepository.update(contract);
     }
-    public void deleteContract(WarehouseContract contract) {
-        contractRepository.delete(contract);
+    public boolean deleteContract(WarehouseContract contract) {
+        return contractRepository.delete(contract);
     }
 
     public ObservableList<ContractListViewModel> getAllContracts() {

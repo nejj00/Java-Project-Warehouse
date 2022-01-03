@@ -23,16 +23,16 @@ public class OwnerService {
         public static final OwnerService INSTANCE = new OwnerService();
     }
 
-    public void insertOwner(Owner owner){
-        ownerRepository.save(owner);
+    public boolean insertOwner(Owner owner){
+        return ownerRepository.save(owner);
     }
 
-    public void updateOwner(Owner owner){
-        ownerRepository.update(owner);
+    public boolean updateOwner(Owner owner){
+        return ownerRepository.update(owner);
     }
 
-    public void deleteOwner(Owner owner){
-        ownerAccountRepository.delete(owner.getOwnerAccount()); // when you call delete account it also deletes the user
+    public boolean deleteOwner(Owner owner){
+        return ownerAccountRepository.delete(owner.getOwnerAccount()); // when you call delete account it also deletes the user
         //ownerRepository.delete(owner);                        // because of to 1:1 relation user:account
     }
 

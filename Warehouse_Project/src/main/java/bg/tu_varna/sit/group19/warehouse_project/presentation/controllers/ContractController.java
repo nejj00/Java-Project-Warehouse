@@ -127,7 +127,9 @@ public class ContractController {
             if(!result)
                 return;
 
-            AddContractToDB(fromDate,toDate,price,warehouseRoom,agent,renter,owner);
+            AddContractToDB(fromDate, toDate, price, warehouseRoom, agent, renter, owner);
+            agent.setRating(agent.getRating() + 1);
+            agentService.updateAgent(agent);
             AnchorPane.getChildren().clear();
         }
     }
@@ -136,6 +138,12 @@ public class ContractController {
     private void onComboSelectionChanged(Event event) {
         RoomCombobox.getItems().clear();
         Warehouse warehouse = WarehouseCombobox.getSelectionModel().getSelectedItem();
+        if(!warehouse.getStatus().getStatus().equals("free"))
+        {
+            AlertMessages.alertWarningMessage(contractWindowModel.getAlertTitle(), contractWindowModel.getAlertWarehouseNotFree());
+            return;
+        }
+
         OwnerName.setText(warehouse.getOwner().getFirstName());
         OwnerFamily.setText(warehouse.getOwner().getLastName());
         RoomCombobox.getItems().addAll(warehouseRoomRepository.getAllRoomsFromWarehouseWithId(warehouse.getId()));

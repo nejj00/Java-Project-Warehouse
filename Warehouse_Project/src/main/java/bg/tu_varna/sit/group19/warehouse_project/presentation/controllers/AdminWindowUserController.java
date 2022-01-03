@@ -68,7 +68,7 @@ public class AdminWindowUserController implements EventHandler<MouseEvent> {
     }
     private final AdminWindowModel adminWindowModel = new AdminWindowModel();
     private void menuDeleteAction() {
-        boolean forDeletion = AlertMessages.alertYesNoResult(adminWindowModel.getAlertDeleteTitle(), adminWindowModel.getAlertDeleteMessage());
+        boolean forDeletion = AlertMessages.alertYesNoResult(adminWindowModel.getAlertDeleteMessage(), adminWindowModel.getAlertDeleteTitle());
         if(!forDeletion)
             return;
 

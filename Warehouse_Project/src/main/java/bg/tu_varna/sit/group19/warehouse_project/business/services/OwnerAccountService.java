@@ -17,16 +17,16 @@ public class OwnerAccountService {
         public static final OwnerAccountService INSTANCE = new OwnerAccountService();
     }
 
-    public void insertOwnerAccount(OwnerAccount ownerAccount){
-        ownerAccountRepository.save(ownerAccount);
+    public boolean insertOwnerAccount(OwnerAccount ownerAccount){
+        return ownerAccountRepository.save(ownerAccount);
     }
 
-    public void updateOwnerAccount(OwnerAccount ownerAccount){
-        ownerAccountRepository.update(ownerAccount);
+    public boolean updateOwnerAccount(OwnerAccount ownerAccount){
+        return ownerAccountRepository.update(ownerAccount);
     }
 
-    public void deleteOwnerAccount(OwnerAccount ownerAccount){
-        ownerAccountRepository.delete(ownerAccount);
+    public boolean deleteOwnerAccount(OwnerAccount ownerAccount){
+        return ownerAccountRepository.delete(ownerAccount);
     }
 
     public OwnerAccount getOwnerAccountById(Long id){

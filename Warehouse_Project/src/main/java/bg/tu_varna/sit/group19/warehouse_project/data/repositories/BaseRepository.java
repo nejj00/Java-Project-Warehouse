@@ -34,7 +34,7 @@ public class BaseRepository<T> implements DAORepository<T>{
      */
 
     @Override
-    public void save(T obj) {
+    public boolean save(T obj) {
         Session session = Connection.openSession();
         Transaction transaction = session.beginTransaction();
         try{
@@ -43,14 +43,16 @@ public class BaseRepository<T> implements DAORepository<T>{
         }catch (Exception ex){
             log.error("Save error " + ex.getMessage());
             showErrorBox("ERROR Saving record!");
+            return false;
         }finally {
             transaction.commit();
             Connection.openSessionClose();
         }
+        return true;
     }
 
     @Override
-    public void update(T obj) {
+    public boolean update(T obj) {
         Session session = Connection.openSession();
         Transaction transaction = session.beginTransaction();
         try{
@@ -59,16 +61,18 @@ public class BaseRepository<T> implements DAORepository<T>{
         }catch (Exception ex){
             log.error("Update error " + ex.getMessage());
             showErrorBox("ERROR Updating record!");
+            return false;
         }finally {
             transaction.commit();
             Connection.openSessionClose();
         }
+        return true;
     }
 
 
 
     @Override
-    public void delete(T obj) {
+    public boolean delete(T obj) {
         Session session = Connection.openSession();
         Transaction transaction = session.beginTransaction();
         try{
@@ -77,10 +81,12 @@ public class BaseRepository<T> implements DAORepository<T>{
         }catch (Exception ex){
             log.error("Delete error " + ex.getMessage());
             showErrorBox("ERROR Deleting record!");
+            return false;
         }finally {
             transaction.commit();
             Connection.openSessionClose();
         }
+        return true;
     }
 
     @Override
