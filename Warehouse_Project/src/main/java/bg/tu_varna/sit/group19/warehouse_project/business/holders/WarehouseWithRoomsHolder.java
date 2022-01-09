@@ -6,6 +6,8 @@ public class WarehouseWithRoomsHolder {
 
     private WarehouseWithRooms warehouseWithRooms = new WarehouseWithRooms();
 
+    boolean sizeCheck;
+
     private final static WarehouseWithRoomsHolder INSTANCE = new WarehouseWithRoomsHolder();
 
     private WarehouseWithRoomsHolder() {}
@@ -20,5 +22,13 @@ public class WarehouseWithRoomsHolder {
 
     public void setWarehouseWithRooms(WarehouseWithRooms warehouseWithRooms) {
         this.warehouseWithRooms = warehouseWithRooms;
+    }
+
+    public boolean isSizeCheck() {
+        return sizeCheck;
+    }
+
+    public void setSizeCheck(boolean sizeCheck) {
+        this.sizeCheck = sizeCheck;
     }
 }

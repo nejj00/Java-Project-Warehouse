@@ -19,7 +19,7 @@ public class WarehouseRoomListViewModel {
 
     @Override
     public String toString() {
-        return String.format("%f | %f | %s", price, size, climateCondition.getConditions());
+        return String.format("%f | %f | %s", price, size, climateCondition.toString());
     }
 
     public Long getWarehouseRoomID() {

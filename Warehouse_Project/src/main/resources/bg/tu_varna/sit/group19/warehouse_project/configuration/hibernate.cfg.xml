@@ -7,8 +7,8 @@
     <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
     <property name="connection.url">jdbc:sqlserver://localhost\MSSQLSERVER:1433;database=JavaWarehouse</property>
     <property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-    <property name="connection.username">Radi_boy112</property>
-    <property name="connection.password">U18sccemnjq51rs1</property>
+    <property name="connection.username">Java_Project</property>
+    <property name="connection.password">myJava1234</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hiernate.hbm2ddl.auto">update</property>
 

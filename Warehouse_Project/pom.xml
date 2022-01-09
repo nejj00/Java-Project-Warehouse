@@ -129,7 +129,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                bg.tu_varna.sit.group19.warehouse_project/bg.tu_varna.sit.group19.warehouse_project.application.HelloApplication
+                                bg.tu_varna.sit.group19.warehouse_project/bg.tu_varna.sit.group19.warehouse_project.application.MainApplication
                             </mainClass>
                         </configuration>
                     </execution>

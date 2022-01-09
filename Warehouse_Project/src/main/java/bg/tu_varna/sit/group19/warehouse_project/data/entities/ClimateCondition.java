@@ -14,8 +14,11 @@ public class ClimateCondition implements Serializable {
     @Column(name = "ID", nullable = false)
     private long id;
 
-    @Column(name = "Conditions", nullable = false)
-    private String conditions;
+    @Column(name = "Temperature", nullable = false)
+    private int temperature;
+
+    @Column(name = "Humidity", nullable = false)
+    private int humidity;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "condition")
     private Set<WarehouseRoom> warehouseRooms;
@@ -28,12 +31,20 @@ public class ClimateCondition implements Serializable {
         this.id = id;
     }
 
-    public String getConditions() {
-        return conditions;
+    public int getTemperature() {
+        return temperature;
     }
 
-    public void setConditions(String conditions) {
-        this.conditions = conditions;
+    public void setTemperature(int temperature) {
+        this.temperature = temperature;
+    }
+
+    public int getHumidity() {
+        return humidity;
+    }
+
+    public void setHumidity(int humidity) {
+        this.humidity = humidity;
     }
 
     public Set<WarehouseRoom> getWarehouseRooms() {
@@ -46,10 +57,8 @@ public class ClimateCondition implements Serializable {
 
     @Override
     public String toString() {
-        return "ClimateCondition{" +
-                "id=" + id +
-                ", conditions='" + conditions + '\'' +
-                '}';
+        return "ClimateCondition:" + id +
+                " temp =" + temperature + " humidity = " + humidity;
     }
 
     @Override
@@ -57,6 +66,6 @@ public class ClimateCondition implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ClimateCondition that = (ClimateCondition) o;
-        return id == that.id && conditions.equals(that.conditions);
+        return id == that.id;
     }
 }

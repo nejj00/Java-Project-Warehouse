@@ -112,10 +112,10 @@ public class BaseRepository<T> implements DAORepository<T>{
     public List<T> getAll() {
         Session session = Connection.openSession();
         Transaction transaction = session.beginTransaction();
-        List<T> admins = new LinkedList<>();
+        List<T> records = new LinkedList<>();
         try{
             String jpql = "SELECT u FROM " + typeParameterClass.getName() + " u";
-            admins.addAll(session.createQuery(jpql, typeParameterClass).getResultList());
+            records.addAll(session.createQuery(jpql, typeParameterClass).getResultList());
             log.info("Got all tasks");
         }catch (Exception ex){
             log.error("Get Task error: " + ex.getMessage());
@@ -125,7 +125,7 @@ public class BaseRepository<T> implements DAORepository<T>{
             Connection.openSessionClose();
         }
 
-        return admins;
+        return records;
     }
 
     void showErrorBox(String errorString) {

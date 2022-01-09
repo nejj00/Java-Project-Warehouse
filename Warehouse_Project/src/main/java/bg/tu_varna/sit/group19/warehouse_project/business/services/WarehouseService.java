@@ -85,7 +85,7 @@ public class WarehouseService {
     }
 
     public ObservableList<WarehouseListViewModel> getWarehousesForOwner(Owner owner){
-        List<Warehouse> warehouses = new ArrayList<Warehouse>(owner.getWarehouses());
+        List<Warehouse> warehouses = warehouseRepository.getWarehousesForOwner(owner);
 
         return FXCollections.observableList(
                 warehouses.stream().map(warehouse -> new WarehouseListViewModel(

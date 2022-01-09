@@ -16,7 +16,9 @@ import javafx.stage.Stage;
 
 public class ClimateWindowController {
     @FXML
-    private TextField conditionsTextField;
+    private TextField temperatureTextField;
+    @FXML
+    private TextField humidityTextField;
     @FXML
     private Button confirmButton;
     @FXML
@@ -30,39 +32,45 @@ public class ClimateWindowController {
         cancelButton.setOnMouseClicked(this::CancelClicked);
 
         if(climateHolder.getClimateOpenMode() == Enums.OpenMode.UpdateMode)
-            conditionsTextField.setText(climateHolder.getClimateCondition().getConditions());
+        {
+            temperatureTextField.setText(String.valueOf(climateHolder.getClimateCondition().getTemperature()));
+            humidityTextField.setText(String.valueOf(climateHolder.getClimateCondition().getHumidity()));
+        }
     }
 
     private final BaseWindowModel baseWindowModel = new BaseWindowModel();
     private void ConfirmClicked(MouseEvent mouseEvent) {
-        if(conditionsTextField.getText().trim().isEmpty()) {
+        if(temperatureTextField.getText().trim().isEmpty() || humidityTextField.getText().trim().isEmpty()) {
             AlertMessages.alertWarningMessage(baseWindowModel.getAlertTitle(), baseWindowModel.getAlertEmptyFields());
             return;
         }
 
-        String conditions = conditionsTextField.getText();
+        int temperature = Integer.parseInt(temperatureTextField.getText());
+        int humidity = Integer.parseInt(humidityTextField.getText());
 
         if(climateHolder.getClimateOpenMode() == Enums.OpenMode.InsertMode)
-            insertClimateDb(conditions);
+            insertClimateDb(temperature, humidity);
         if(climateHolder.getClimateOpenMode() == Enums.OpenMode.UpdateMode)
-            updateClimateDb(conditions);
+            updateClimateDb(temperature, humidity);
 
         Stage stage = (Stage) confirmButton.getScene().getWindow();
         stage.close();
     }
 
     private final ClimateService climateService = ClimateService.getInstance();
-    private void insertClimateDb(String conditions) {
+    private void insertClimateDb(int temperature, int humidity) {
         ClimateCondition climateCondition = new ClimateCondition();
-        climateCondition.setConditions(conditions);
+        climateCondition.setTemperature(temperature);
+        climateCondition.setHumidity(humidity);
         climateService.insertClimate(climateCondition);
         climateHolder.setClimateCondition(climateCondition);
     }
 
-    private void updateClimateDb(String conditions) {
+    private void updateClimateDb(int temperature, int humidity) {
         ClimateCondition climateCondition = new ClimateCondition();
         climateCondition.setId(climateHolder.getClimateCondition().getId());
-        climateCondition.setConditions(conditions);
+        climateCondition.setTemperature(temperature);
+        climateCondition.setHumidity(humidity);
 
         climateService.updateClimate(climateCondition);
         climateHolder.setClimateCondition(climateCondition);

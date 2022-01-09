@@ -6,12 +6,10 @@ import bg.tu_varna.sit.group19.warehouse_project.business.utils.AlertMessages;
 import bg.tu_varna.sit.group19.warehouse_project.business.utils.ListContextMenu;
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
 import bg.tu_varna.sit.group19.warehouse_project.common.Enums;
-import bg.tu_varna.sit.group19.warehouse_project.common.ScenePaneSwitcher;
+import bg.tu_varna.sit.group19.warehouse_project.business.utils.ScenePaneSwitcher;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.ClimateCondition;
-import bg.tu_varna.sit.group19.warehouse_project.data.entities.WarehouseStatus;
 import bg.tu_varna.sit.group19.warehouse_project.presentation.models.BaseWindowModel;
 import bg.tu_varna.sit.group19.warehouse_project.presentation.models.ClimateListViewModel;
-import bg.tu_varna.sit.group19.warehouse_project.presentation.models.StatusListViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
@@ -49,7 +47,8 @@ public class ClimateListController {
         ScenePaneSwitcher.openNewStageAndWait(pathClimate);
 
         ClimateListViewModel climateListViewModel = new ClimateListViewModel(
-                climateHolder.getClimateCondition().getId(), climateHolder.getClimateCondition().getConditions());
+                climateHolder.getClimateCondition().getId(), climateHolder.getClimateCondition().getTemperature(),
+                climateHolder.getClimateCondition().getHumidity());
 
         climateListView.getItems().add(climateListViewModel);
     }
@@ -59,10 +58,12 @@ public class ClimateListController {
         ClimateListViewModel climateListViewModel = climateListView.getSelectionModel().getSelectedItem();
 
         climateHolder.getClimateCondition().setId(climateListViewModel.getClimateID());
-        climateHolder.getClimateCondition().setConditions(climateListViewModel.getConditions());
+        climateHolder.getClimateCondition().setTemperature(climateListViewModel.getTemperature());
+        climateHolder.getClimateCondition().setHumidity(climateListViewModel.getHumidity());
         ScenePaneSwitcher.openNewStageAndWait(pathClimate);
 
-        climateListViewModel.setConditions(climateHolder.getClimateCondition().getConditions());
+        climateListViewModel.setTemperature(climateHolder.getClimateCondition().getTemperature());
+        climateListViewModel.setHumidity(climateHolder.getClimateCondition().getHumidity());
         climateListView.getItems().set(climateListView.getSelectionModel().getSelectedIndex(), climateListViewModel);
     }
 
@@ -75,7 +76,8 @@ public class ClimateListController {
         ClimateListViewModel climateListViewModel = climateListView.getSelectionModel().getSelectedItem();
         ClimateCondition climateCondition = new ClimateCondition();
         climateCondition.setId(climateListViewModel.getClimateID());
-        climateCondition.setConditions(climateListViewModel.getConditions());
+        climateCondition.setTemperature(climateListViewModel.getTemperature());
+        climateCondition.setHumidity(climateListViewModel.getHumidity());
 
         climateService.deleteClimate(climateCondition);
         climateListView.getItems().remove(climateListViewModel);

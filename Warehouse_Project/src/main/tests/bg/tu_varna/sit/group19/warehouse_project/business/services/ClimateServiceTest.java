@@ -20,22 +20,24 @@ class ClimateServiceTest {
     @Test
     @Order(1)
     void insertClimate() {
-        climateCondition.setConditions("test_cond");
+        climateCondition.setTemperature(1);
+        climateCondition.setHumidity(1);
         assertTrue(climateService.insertClimate(climateCondition));
     }
 
     @Test
     @Order(2)
     void updateClimate() {
-        climateCondition = climateService.getClimateCondition("test_cond");
-        climateCondition.setConditions("TEST_COND");
+        climateCondition = climateService.getClimateCondition(1, 1);
+        climateCondition.setTemperature(2);
+        climateCondition.setTemperature(2);
         assertTrue(climateService.updateClimate(climateCondition));
     }
 
     @Test
     @Order(3)
     void deleteClimate() {
-        climateCondition = climateService.getClimateCondition("TEST_COND");
+        climateCondition = climateService.getClimateCondition(2, 2);
         assertTrue(climateService.deleteClimate(climateCondition));
     }
 }

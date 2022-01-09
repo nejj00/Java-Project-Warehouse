@@ -21,7 +21,7 @@ public class Agent {
     private String lastName;
 
     @Column(name = "Raiting", nullable = false)
-    private float rating;
+    private int rating;
 
     @OneToOne(mappedBy = "agent")
     private AgentAccount agentAccount;
@@ -69,11 +69,11 @@ public class Agent {
         this.contracts = contracts;
     }
 
-    public float getRating() {
+    public int getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 

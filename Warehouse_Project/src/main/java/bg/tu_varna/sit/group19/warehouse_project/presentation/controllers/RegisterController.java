@@ -8,7 +8,7 @@ import bg.tu_varna.sit.group19.warehouse_project.business.services.OwnerService;
 import bg.tu_varna.sit.group19.warehouse_project.business.utils.AccountChecker;
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
 import bg.tu_varna.sit.group19.warehouse_project.common.Enums;
-import bg.tu_varna.sit.group19.warehouse_project.common.ScenePaneSwitcher;
+import bg.tu_varna.sit.group19.warehouse_project.business.utils.ScenePaneSwitcher;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Agent;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.AgentAccount;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Owner;
@@ -221,7 +221,7 @@ public class RegisterController implements EventHandler<MouseEvent> {
         Agent agent = new Agent();
         agent.setFirstName(firstName);
         agent.setLastName(lastName);
-        agent.setRating(0.0f);
+        agent.setRating(0);
 
         agentService.insertAgent(agent);
 

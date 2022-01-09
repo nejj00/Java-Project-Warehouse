@@ -7,7 +7,7 @@ import bg.tu_varna.sit.group19.warehouse_project.business.services.OwnerAccountS
 import bg.tu_varna.sit.group19.warehouse_project.business.utils.AccountChecker;
 import bg.tu_varna.sit.group19.warehouse_project.common.Enums;
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
-import bg.tu_varna.sit.group19.warehouse_project.common.ScenePaneSwitcher;
+import bg.tu_varna.sit.group19.warehouse_project.business.utils.ScenePaneSwitcher;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Admin;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Agent;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Owner;
@@ -63,7 +63,7 @@ public class LoginController implements EventHandler<MouseEvent> {
     }
 
     @FXML
-    public boolean LoginClicked(MouseEvent mouseEvent) {
+    public void LoginClicked(MouseEvent mouseEvent) {
         //check if account exists
         //if not exists - wrong message
         //else
@@ -77,7 +77,7 @@ public class LoginController implements EventHandler<MouseEvent> {
             LoginLabel.setText(model.getWrongMessage());
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Account DOES NOT exists or password is INCORRECT");
             alert.showAndWait();
-            return false;
+            return;
         }
 
         Stage thisStage = method.getStage(mouseEvent);
@@ -95,7 +95,6 @@ public class LoginController implements EventHandler<MouseEvent> {
         if(accountType.getAccountType() == AccountTypeEnum.AccountType.Admin)
             openAdminWindow(username);
          */
-        return true;
     }
 
     private void openAdminWindow(String username) {

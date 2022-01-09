@@ -85,7 +85,7 @@ public class WarehouseRoom {
         return "WarehouseRoom " + id +
                 ", size=" + size +
                 ", price=" + price +
-                ", condition=" + condition.getConditions();
+                ", condition=" + condition.toString();
     }
 
     @Override

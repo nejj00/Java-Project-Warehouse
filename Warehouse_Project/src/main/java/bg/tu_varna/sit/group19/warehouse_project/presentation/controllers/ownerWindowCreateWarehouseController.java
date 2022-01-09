@@ -9,7 +9,7 @@ import bg.tu_varna.sit.group19.warehouse_project.business.utils.AlertMessages;
 import bg.tu_varna.sit.group19.warehouse_project.business.utils.ListContextMenu;
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
 import bg.tu_varna.sit.group19.warehouse_project.common.Enums;
-import bg.tu_varna.sit.group19.warehouse_project.common.ScenePaneSwitcher;
+import bg.tu_varna.sit.group19.warehouse_project.business.utils.ScenePaneSwitcher;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.*;
 import bg.tu_varna.sit.group19.warehouse_project.presentation.models.OwnerWindowModel;
 import bg.tu_varna.sit.group19.warehouse_project.presentation.models.WarehouseRoomListViewModel;
@@ -137,7 +137,8 @@ public class ownerWindowCreateWarehouseController {
         WarehouseRoomListViewModel warehouseRoomListViewModel = new WarehouseRoomListViewModel(
                 warehouseRoom.getId(), warehouseRoom.getSize(), warehouseRoom.getPrice(), warehouseRoom.getCondition());
 
-        warehouseRoomsListView.getItems().add(warehouseRoomListViewModel);
+        if(warehouseWithRoomsHolder.isSizeCheck())
+            warehouseRoomsListView.getItems().add(warehouseRoomListViewModel);
     }
 
     private void initWarehouseSize() {

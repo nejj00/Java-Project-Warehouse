@@ -2,7 +2,6 @@ package bg.tu_varna.sit.group19.warehouse_project.common;
 
 public class Constants {
     public static class View{
-        public static final String HELLO_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentations.view/hello-view.fxml";
         public static final String LOGIN_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentations.view/login.fxml";
         public static final String MAIN_WINDOW_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentations.view/MainWindow.fxml";
         public static final String REGISTER_VIEW = "/bg/tu_varna/sit/group19/warehouse_project/presentations.view/register.fxml";
@@ -35,7 +34,7 @@ public class Constants {
     }
 
     public static class HibernateConfig{
-        public static final String CFG_FILE = "\\Users\\Radi_boy112\\Documents\\GitHub\\Java-Project-Warehouse\\Warehouse_Project\\src\\main\\resources\\bg\\tu_varna\\sit\\group19\\warehouse_project\\configuration\\hibernate.cfg.xml";
+        public static final String CFG_FILE = "E:\\GitHub\\UNI\\Java-Project-Warehouse\\Warehouse_Project\\src\\main\\resources\\bg\\tu_varna\\sit\\group19\\warehouse_project\\configuration\\hibernate.cfg.xml";
     }
 
     public static class Owner {

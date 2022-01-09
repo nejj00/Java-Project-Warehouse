@@ -4,7 +4,7 @@ import bg.tu_varna.sit.group19.warehouse_project.business.holders.AgentHolder;
 import bg.tu_varna.sit.group19.warehouse_project.business.holders.UserHolder;
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
 import bg.tu_varna.sit.group19.warehouse_project.common.Enums;
-import bg.tu_varna.sit.group19.warehouse_project.common.ScenePaneSwitcher;
+import bg.tu_varna.sit.group19.warehouse_project.business.utils.ScenePaneSwitcher;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Agent;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Owner;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.Renter;

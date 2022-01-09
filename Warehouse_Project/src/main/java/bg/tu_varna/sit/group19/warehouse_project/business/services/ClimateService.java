@@ -37,11 +37,11 @@ public class ClimateService {
         return climateRepository.delete(climateCondition);
     }
 
-    public ClimateCondition getClimateCondition(String condition) {
+    public ClimateCondition getClimateCondition(int temperature, int humidity) {
         List<ClimateCondition> climateConditions = climateRepository.getAll();
 
         for (ClimateCondition c : climateConditions) {
-            if(c.getConditions().equals(condition))
+            if(c.getTemperature() == temperature && c.getHumidity() == humidity)
                 return c;
         }
 
@@ -54,7 +54,8 @@ public class ClimateService {
         return FXCollections.observableList(
                 conditions.stream().map(condition -> new ClimateListViewModel(
                         condition.getId(),
-                        condition.getConditions()
+                        condition.getTemperature(),
+                        condition.getHumidity()
                 )).collect(Collectors.toList()));
     }
 

@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.group19.warehouse_project.common;
+package bg.tu_varna.sit.group19.warehouse_project.business.utils;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;

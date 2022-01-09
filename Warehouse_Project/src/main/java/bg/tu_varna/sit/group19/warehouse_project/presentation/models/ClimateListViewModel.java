@@ -2,16 +2,18 @@ package bg.tu_varna.sit.group19.warehouse_project.presentation.models;
 
 public class ClimateListViewModel {
     private Long climateID;
-    private String conditions;
+    private int temperature;
+    private int humidity;
 
-    public ClimateListViewModel(Long ID, String conditions){
+    public ClimateListViewModel(Long ID, int temperature, int humidity){
         this.climateID = ID;
-        this.conditions = conditions;
+        this.temperature = temperature;
+        this.humidity = humidity;
     }
 
     @Override
     public String toString() {
-        return String.format("%s", conditions);
+        return String.format("temp: %d, humid: %d%", temperature, humidity);
     }
 
     public Long getClimateID() {
@@ -22,11 +24,19 @@ public class ClimateListViewModel {
         this.climateID = climateID;
     }
 
-    public String getConditions() {
-        return conditions;
+    public int getTemperature() {
+        return temperature;
     }
 
-    public void setConditions(String conditions) {
-        this.conditions = conditions;
+    public void setTemperature(int temperature) {
+        this.temperature = temperature;
+    }
+
+    public int getHumidity() {
+        return humidity;
+    }
+
+    public void setHumidity(int humidity) {
+        this.humidity = humidity;
     }
 }

@@ -6,11 +6,10 @@ import bg.tu_varna.sit.group19.warehouse_project.business.utils.AlertMessages;
 import bg.tu_varna.sit.group19.warehouse_project.business.utils.ListContextMenu;
 import bg.tu_varna.sit.group19.warehouse_project.common.Constants;
 import bg.tu_varna.sit.group19.warehouse_project.common.Enums;
-import bg.tu_varna.sit.group19.warehouse_project.common.ScenePaneSwitcher;
+import bg.tu_varna.sit.group19.warehouse_project.business.utils.ScenePaneSwitcher;
 import bg.tu_varna.sit.group19.warehouse_project.data.entities.WarehouseStatus;
 import bg.tu_varna.sit.group19.warehouse_project.presentation.models.BaseWindowModel;
 import bg.tu_varna.sit.group19.warehouse_project.presentation.models.StatusListViewModel;
-import bg.tu_varna.sit.group19.warehouse_project.presentation.models.WarehouseRoomListViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 

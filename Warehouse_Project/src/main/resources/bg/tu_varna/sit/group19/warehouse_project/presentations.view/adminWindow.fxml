@@ -40,11 +40,6 @@
                   <Font size="25.0" />
                </font>
             </Button>
-            <Button layoutX="5.0" layoutY="440.0" mnemonicParsing="false" onMouseClicked="#editClimateConditionsClicked" prefHeight="60.0" prefWidth="390.0" text="Edit Climate Conditions">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Button>
          </children>
       </AnchorPane>
    </left>
