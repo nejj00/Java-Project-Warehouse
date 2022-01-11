@@ -19,8 +19,8 @@ class AccountCheckerTest {
     void setUp() {
         accountChecker = new AccountChecker();
         ownerAccount = new OwnerAccount();
-        ownerAccount.setUsername("ivan123");
-        ownerAccount.setPassword("4321");
+        ownerAccount.setUsername("owner");
+        ownerAccount.setPassword("owner");
     }
 
     @Test

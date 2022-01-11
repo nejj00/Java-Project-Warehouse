@@ -30,7 +30,7 @@ class ClimateServiceTest {
     void updateClimate() {
         climateCondition = climateService.getClimateCondition(1, 1);
         climateCondition.setTemperature(2);
-        climateCondition.setTemperature(2);
+        climateCondition.setHumidity(2);
         assertTrue(climateService.updateClimate(climateCondition));
     }
 
